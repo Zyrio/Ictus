@@ -1,0 +1,38 @@
+{
+    "version": "0.1.0",
+    "windows": {
+        "command": "cmd",
+        "args": ["/C"],
+        "suppressTaskName": true,
+        "tasks": [
+            {
+                "taskName": "App: Build .NET App",
+                "args": ["dotnet build ${workspaceRoot}/src/Yio/"]
+            }
+        ]
+    },
+    "linux": {
+        "command": "sh",
+        "args": ["-c"],
+        "suppressTaskName": true,
+        "tasks": [
+            {
+                "taskName": "App: Build .NET App",
+                "args": ["dotnet build ${workspaceRoot}/src/Yio/"]
+            }
+        ]
+    },
+    "osx": {
+        "command": "sh",
+        "args": ["-c"],
+        "suppressTaskName": true,
+        "tasks": [
+            {
+                "taskName": "App: Build .NET App",
+                "args": ["dotnet build ${workspaceRoot}/src/Yio/"]
+            }
+        ]
+    },
+    "isShellCommand": true,
+    "showOutput": "always"
+}
