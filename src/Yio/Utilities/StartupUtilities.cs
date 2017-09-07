@@ -64,7 +64,7 @@ namespace Yio.Utilities
             Console.ResetColor();
 
             Console.ForegroundColor = ConsoleColor.DarkGray;
-            Console.WriteLine("-----------------" + Environment.NewLine);
+            Console.WriteLine("---------------" + Environment.NewLine);
             Console.ResetColor();
 
             Console.WriteLine("Release " + Release + Environment.NewLine);
