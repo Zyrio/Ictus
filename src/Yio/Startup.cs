@@ -10,6 +10,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Yio.Data;
 using Yio.Data.Constants;
+using Yio.Data.Repositories;
+using Yio.Data.Repositories.Interfaces;
 
 namespace Yio
 {
@@ -34,6 +36,10 @@ namespace Yio
 
             services.AddMvc();
             services.AddOptions();
+
+            services.AddTransient<IFileRepository, FileRepository>();
+            services.AddTransient<IFileTagRepository, FileTagRepository>();
+            services.AddTransient<ITagRepository, TagRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -42,11 +48,20 @@ namespace Yio
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseBrowserLink();
+            }
+            else
+            {
+                app.UseExceptionHandler("/Home/Error");
             }
 
-            app.Run(async (context) =>
+            app.UseStaticFiles();
+
+            app.UseMvc(routes =>
             {
-                await context.Response.WriteAsync("Hello World!");
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }
