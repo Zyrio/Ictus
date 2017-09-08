@@ -6,5 +6,6 @@ namespace Yio.Models.ApiModels.ApiV1Models {
         public string Default { get; set; }
         public string ShowNav { get; set; }
         public string Repos { get; set; }
+        public string Endpoint { get; set; }
     }
 }

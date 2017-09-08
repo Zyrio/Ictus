@@ -4,43 +4,286 @@ html {
 
 body {
     background-color: #111111;
-    background-repeat: no-repeat;
-    background-position: center; 
-    background-size: contain;
     font-family: 'Raleway', sans-serif;
     height: 100%;
     margin: 0;
     padding: 0;
 }
 
-#overlay_Loading {
-    display: none !important;
+#container {
     display: table;
     width: 100%;
     height: 100%;
-    z-index: 99999;
-    background-color: #333333;
+    position: absolute;
 }
 
-    #overlay_Loading > div {
-        display: table-cell;
-        vertical-align: middle;
-        text-align: center;
+#sidebar {
+    display: table-cell;
+    width: 200px;
+    height: 100%;
+    position: absolute;
+    overflow: hidden;
+    background-color: #222222;
+    transition: all 0.5s linear;
+    left: -200px;
+    z-index: 10;
+}
+
+    #sidebar.visible {
+        left: 0;
+        box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.75);
     }
 
-#overlay_Click {
+#sidebar-inner {
+    width: 200px;
     display: table;
-    font-size: 0;
     height: 100%;
-    margin: 0;
-    min-height: 100%;
-    padding: 0;
-    text-decoration: none;
-    width: 100%;
-    z-index: 50;
+    max-height: 100%;
 }
 
-#overlay_Panel {
+#sidebar-logo-container,
+#sidebar-search-container,
+#sidebar-nav-container,
+#sidebar-tags-container,
+#sidebar-footer-container {
+    display: table-row;
+}
+
+#sidebar-logo {
+    background-color: #33FFB8;
+    padding: 10px;
+    font-size: 30px;
+    line-height: 30px;
+    font-family: 'Oswald', sans-serif;
+    text-transform: uppercase;
+    position: relative;
+    display: table-cell;
+    height: 1px;
+}
+
+    #sidebar-logo a {
+        color: inherit;
+    }
+
+    #sidebar-logo .fa {
+        position: absolute;
+        right: 10px;
+        top: 10px;
+    }
+
+#sidebar-search {
+    background-color: #E0FF33;
+    border-top: 4px solid #3D3D3D;
+    padding: 10px;
+    display: table-cell;
+    height: 1px;
+}
+
+    #sidebar-search span {
+        font-size: 12px;
+        line-height: 10px;
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    #sidebar-search select {
+        width: 100%;
+    }
+
+#sidebar-nav {
+    border-top: 4px solid #3D3D3D;
+    display: table-cell;
+    height: 1px;
+}
+
+    #sidebar-nav ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+    }
+
+        #sidebar-nav ul li {
+            font-family: 'Oswald', sans-serif;
+            font-size: 18px;
+            line-height: 18px;
+            text-transform: uppercase;
+            color: #FFFFFF;
+            position: relative;
+            transition: 0.5s;
+        }
+
+            #sidebar-nav ul li:hover {
+                background-color: #DDDDDD !important;
+                color: #111111 !important;
+            }
+
+            #sidebar-nav ul li.disabled {
+                background-color: #111111;
+                opacity: 0.25;
+            }
+
+                #sidebar-nav ul li.disabled a {
+                    pointer-events: none;
+                }
+
+            #sidebar-nav ul li.random-button-item {
+                background-color: #FF337A;
+                color: #000000;
+            }
+
+            #sidebar-nav ul li.history-button-item {
+                background-color: #222222;
+                color: #FFFFFF;
+            }
+
+            #sidebar-nav ul li.hfm-button-item {
+                background-color: #2F2F2F;
+                color: #FFFFFF;
+            }
+
+            #sidebar-nav ul li.direct-button-item {
+                background-color: #222222;
+                color: #FFFFFF;
+            }
+
+            #sidebar-nav ul li.upload-button-item {
+                background-color: #2F2F2F;
+                color: #FFFFFF;
+            }
+
+            #sidebar-nav ul li a {
+                color: inherit;
+                text-decoration: none;
+                padding: 10px;
+                display: block;
+            }
+
+                #sidebar-nav ul li a .fa {
+                    position: absolute;
+                    right: 10px;
+                    top: 10px;
+                }
+
+#sidebar-tags {
+    display: table-cell;
+    border-top: 4px solid #3D3D3D;
+}
+
+#sidebar-tags-inner {
+    visibility: hidden;
+    overflow-y: scroll;
+    height: 1px;
+}
+
+#sidebar-footer {
+    display: table-cell;
+    height: 1px;
+    padding: 10px;
+}
+
+    #sidebar-footer ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+    }
+
+        #sidebar-footer ul li {
+            color: #FFFFFF;
+            opacity: 0.4;
+            font-size: 12px;
+            font-family: 'Raleway', sans-serif;
+        }
+
+            #sidebar-footer ul li a {
+                color: inherit;
+                text-decoration: none;
+            }
+
+#sidebar-mini {
+    display: table-cell;
+    width: 0;
+    position: absolute;
+    overflow: visible;
+    z-index: 5;
+    transition: all 0.5s linear;
+    opacity: 1;
+}
+
+    #sidebar-mini.hidden {
+        opacity: 0;
+    }
+
+#sidebar-mini-inner {
+    width: 180px;
+    padding-top: 10px;
+    padding-left: 10px;
+}
+
+    #sidebar-mini-inner a {
+        font-family: 'Oswald', sans-serif;
+        font-size: 22px;
+        text-transform: uppercase;
+        display: block;
+        text-decoration: none;
+        color: #FFFFFF;
+        text-shadow: 0 0 10px #000000;
+    }
+
+        #sidebar-mini-inner a .fa {
+            margin-right: 3px;
+        }
+
+#sidebar-logo-mini {
+    font-size: 26px;
+    color: #FFFFFF;
+    text-shadow: 0 0 10px #000000;
+    text-transform: uppercase;
+    font-family: 'Oswald', sans-serif;
+    margin-bottom: 5px;
+    display: block;
+}
+
+    #sidebar-logo-mini .fa {
+        margin-right: 5px;
+    }
+
+#sidebar-mini-reminder {
+    color: #C4C4C4;
+    text-shadow: 0 0 10px #000000;
+    font-size: 12px;
+    margin: 5px 0 0 3px;
+    display: block;
+    transition: all 0.5s linear;
+}
+
+    #sidebar-mini-reminder strong {
+        font-family: 'Oswald', sans-serif;
+        font-weight: 300;
+        text-transform: uppercase;
+    }
+
+#view {
+    display: table-cell;
+    height: 100%;
+    width: calc(100% - 200px);
+    position: absolute;
+    right: 0;
+    transition: all 0.5s linear;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    cursor: pointer;
+}
+
+    #view.full {
+        width: 100%;
+    }
+
+.invisible {
+    opacity: 0 !important;
+}
+
+#panel-overlay {
     display: none;
     position: absolute;
     width: 100%;
@@ -71,7 +314,6 @@ body {
         font-weight: 700;
         text-decoration: none;
         transition: 0.5s;
-        cursor: pointer;
     }
 
         .panel-inner a:hover,
@@ -79,6 +321,11 @@ body {
             color: purple;
             text-decoration: none;
         }
+
+    .panel-inner .fakelink {
+        font-family: 'Oswald', sans-serif !important;
+        font-weight: 300;
+    }
 
     .panel-inner > h1 {
         font-size: 28px;
@@ -129,120 +376,38 @@ body {
             text-decoration: none;
         }
 
-#container_Controls{
-    bottom: 0;
-    left: 0;
-    position: fixed;
-    width: 100%;
-}
-
-#controls {
-    background-color: #333333;
-    border: 1px solid #33FFB8;
-    display: table;
-    margin: 0 auto 40px auto;
-    opacity: 0.7;
-    width: auto;
-    z-index: 100;
-}
-
-    #controls > div {
-        display: table-cell;
-        font-size: 22px;
-        line-height: 22px;
-        padding: 10px;
-    }
-
-#logo {
-    background-color: #33FFB8;
-    color: #222222;
-    padding: 10px 11px 10px 10px;
-}
-
-#burger {
-    background-color: #000000;
-}
-
-#actions,
-#burger {
-    color: #DDDDDD;
-}
-
-    #actions > a,
-    #burger > a {
-        color: #DDDDDD;
-        text-decoration: none;
-        /*transition: 0.5s;*/
-    }
-
-        #actions > a:hover,
-        #burger > a:hover {
-            color: #E0FF33;   
-        }
-
-#label_RepoSwitch {
-    margin-left: 7px;
-}
-
-.disabled {
-    opacity: 0.4;
-    pointer-events: none;
-}
-
-#panel_RepoSwitch {
-    width: 250px;
-}
-
-    #panel_RepoSwitch ul li {
-        font-size: 20px;
-        font-weight: 700;
-    }
-
-        #panel_RepoSwitch ul li a {
-            text-decoration: none;
-        }
-
-#input_HFMInt {
-    margin-right: 5px;
-}
-
-.about-scroller {
-    height: 200px;
-    overflow-y: scroll;
-    overflow-x: hidden;
-    background-color: #DDDDDD;
-    padding: 20px 20px 0 20px;
-}
-
-    .about-scroller h3 {
-        margin-top: 0;
-        margin-bottom: 20px;
-        font-size: 16px;
-        font-weight: 700;
-    }
-
-    .about-scroller h4 {
-        margin-top: 0;
-        margin-bottom: 5px;
-        font-size: 14px;
-        font-weight: 700;
-    }
-
-    .about-scroller p {
-        font-size: 14px;
-        margin-top: 0;
-        margin-bottom: 20px;
-    }
-
 @media (max-width: 480px) {
-    #logo,
-    #label_RepoSwitch {
-        display: none !important;
-        font-size: 0 !important;
+    #sidebar {
+        width: 100%;
+        display: none;
+        left: 0;
+        transition: all 0.5s linear;
     }
-}
 
-.current-repo {
-    margin-top: 5px !important;;
-    margin-bottom: -10px !important;
+        #sidebar.visible {
+            left: 0;
+            display: block;
+        }
+    
+    #sidebar-inner {
+        width: 100%;
+    }
+
+    #sidebar-mini {
+        transition: none;
+    }
+
+    #view {
+        transition: none;
+    }
+
+        #view.full {
+            width: 100%;
+        }
+
+    .panel {
+        margin: 0;
+        width: 100%;
+        height: 100%;
+    }
 }

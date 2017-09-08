@@ -1,6 +1,5 @@
 @{
     var version = "";
-    var versionName = Yio.Data.Constants.VersionConstant.Codename.ToString();
 
     if(Yio.Data.Constants.VersionConstant.Patch == 0) {
         version = Yio.Data.Constants.VersionConstant.Release.ToString();
@@ -11,163 +10,83 @@
 }
 
 <!DOCTYPE html>
+<html>
 <head>
-	<title>@ViewBag.Title</title>
+    <title>Yiff.co</title>
 
-	<link href="/favicon.ico" rel="icon" type="image/x-icon" />
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-    
-    <environment names="Development,Staging,Production">
-        <link href="//fonts.googleapis.com/css?family=Raleway:400,700" rel="stylesheet" type="text/css">
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-        <link rel="stylesheet" href="/css/site.css" type="text/css">
-    </environment>
-    <style>
-        #controls { border: 1px solid @(ViewBag.Color); }
-        #logo { background-color: @(ViewBag.Color); }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="//fonts.googleapis.com/css?family=Raleway:400,700|Oswald" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/site.css" type="text/css">
 </head>
 <body>
-    <div id="overlay_Loading">
-        <div>
-            <img src="/images/load.gif" />
-        </div>
-    </div>
-
-    <a href="#" id="overlay_Click">
-	   &nbsp;
-	</a>
-
-    <div id="container_Controls">
-		<div id="controls">
-			<div id="logo">
-				@ViewBag.Title
-			</div>
-            <div id="burger">
-                <a href="#" id="btn_RepoSwitch" title="Switch to a different Repository">
-                    <i class="fa fa-bars"></i><span id="label_RepoSwitch"></span>
-                </a>
-            </div>
-			<div id="actions">
-				<a href="#" id="btn_RandomImage" title="Gimme moar!"><i class="fa fa-fw fa-refresh"></i></a>
-				<a href="#" id="btn_HFM" title="Hands-Free Mode"><i class="fa fa-fw fa-clock-o"></i></a>
-				<a href="#" id="btn_Direct" title="Direct Link"><i class="fa fa-fw fa-link"></i></a>
-				<a href="#" id="btn_UploadFile" title="Upload File" class="disabled"><i class="fa fa-fw fa-upload"></i></a>
-				<a href="#" id="btn_About" title="About"><i class="fa fa-fw fa-info-circle"></i></a>
-			</div>
-		</div>
-	</div>
-
-    <div id="overlay_Panel">
-        <div class="panel" id="panel_About">
-            <div class="panel-inner">
-                <div class="panel-close">
-					<a href="#"><i class="fa fa-fw fa-times"></i></a>
-				</div>
-                <h1>About</h1>
-                <p>
-                    <strong>Curl your paw round your dick, and get clicking!</strong>
-                </p>
-                <p>
-                    Filled with furry (and more) porn, stripped from many sources &mdash; tumblr, e621, 4chan, 8chan, etc. &mdash; Yiff.co is the never-ending full-width stream of NSFW images. Built by <a href="https://zyr.io">Zyrio</a>.
-                </p>
-                <p>
-                    Running on version <strong>@version '@(versionName)'</strong>
-                </p>
-                <!--<p>
-                    Something wrong? Contact <a href="mailto:zyrio@zyr.io">zyrio&#64;zyr.io</a>.
-                </p>
-                <div class="about-scroller">
-                    <h3>Extras</h3>
-
-                    <h4>App for Android</h4>
-                    <p>
-                        The latest version available for Android is <strong>1.2.1</strong>. <a href="https://get.zyr.io/dist/Yiff.co/Android/Yiff.co-1.2.1.apk" target="_blank">Download now</a>.
-                        <br />
-                        You will need to <a href="http://www.androidcentral.com/allow-app-installs-unknown-sources" target="_blank">allow unknown sources</a> to install the app. It will never be available on the <em>Google Play Store</em>, due to adult content restrictions.
-                        <br />
-                        Report all issues to the contact link above.
-                    </p>
-                    
-                    <h4>App for iOS</h4>
-                    <p>
-                        Coming soon!
-                        <br />
-                        An official app for iOS.
-                    </p>
-
-                    <h4>App for Windows</h4>
-                    <p>
-                        Coming soon!
-                        <br />
-                        An official app for Windows 10.
-                    </p>
-                    
-                    <h4>Bot for Telegram</h4>
-                    <p>
-                        The Telegram bot can be accessed by messaging (or inviting) <a href="https://telegram.me/yiobot" target="_blank">&#64;YioBot</a>. Use <code>/random &lt;repo&gt;</code> to grab an image from &lt;repo&gt; (leaving it blank will use "furry").
-                        <br />
-                        The bot also posts to the channel <a href="https://t.me/yiffco">&#64;Yiffco</a> every so often (just furry).
-                    </p>
-
-                    <h4>API</h4>
-                    <p>
-                        If you want to see the public API, visit <a href="https://stackedit.io/viewer?url=https://yiff.co/data/api.md" target="_blank">the docs</a>.
-                    </p>
-                </div>-->
-            </div>
-        </div>
-
-        <div class="panel" id="panel_HFM">
-			<div class="panel-inner">
-				<div class="panel-close">
-					<a href="#"><i class="fa fa-fw fa-times"></i></a>
-				</div>
-				<h1>Hands Free Mode</h1>
-				<p><strong>HFM</strong> allows you to sit back, put your paw around your cock, and let the pr0nz fly past. Only images (and GIFs) will be displayed.</p>
-				<p>The "<span class="fakelink"><i class="fa fa-clock-o"></i></span>" will glow red when in operation. Clicking it will stop Hands-free Mode and reset the interval counter.</p>
-				<table class="confbox">
-					<tr>
-						<td>
-							<input type="number" min="1" max="3600" id="input_HFMInt" style="width: 100%;" />
-						</td>
-						<td>
-							&nbsp;Interval between refreshes (in seconds)
-						</td>
-					<tr>
-					<tr class="submit">
-						<td colspan="2">
-							<button id="btn_StartHFM">Start</button>
-						</td>
-					</tr>
-				</table>
-			</div>
-		</div>
-
-        <div class="panel" id="panel_RepoSwitch">
-            <div class="panel-inner">
-                <div class="panel-close">
-                    <a href="#"><i class="fa fa-fw fa-times"></i></a>
+    <div id="container">
+        <div id="sidebar">
+            <div id="sidebar-inner">
+                <div id="sidebar-logo-container">
+                    <div id="sidebar-logo">
+                        Yiff.co
+                        <a href="#"><i id="hide-sidebar-button" class="fa fa-bars"></i></a>
+                    </div>
                 </div>
-                <h1>Switch Repo</h1>
-                <p class="current-repo">
-                    Current: <strong id="label_RepoSwitch_2"></strong>
-                </p>
-                <ul>
-                </ul>
+                <div id="sidebar-search-container">
+                    <div id="sidebar-search">
+                        <span>Select Repository:</span>
+                        <select id="repository-selector">
+                        </select>
+                    </div>
+                </div>
+                <div id="sidebar-nav-container">
+                    <div id="sidebar-nav">
+                        <ul>
+                            <li class="random-button-item"><a id="random-button" href="#"><i class="fa fa-fw fa-random"></i> Random</a></li>
+                            <li class="backward-button-item disabled"><a id="backward-button" href="#"><i class="fa fa-fw fa-backward"></i> Previous File</a></li>
+                            <li class="hfm-button-item"><a id="hfm-button" href="#"><i class="fa fa-fw fa-mouse-pointer"></i> Auto-Click</a></li>
+                            <li class="direct-button-item"><a id="direct-button" href="#"><i class="fa fa-fw fa-link"></i> Direct Link</a></li>
+                            <li class="upload-button-item disabled"><a href="#"><i id="upload-button" class="fa fa-fw fa-upload"></i> Upload</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div id="sidebar-tags-container">
+                    <div id="sidebar-tags">
+                        <div id="sidebar-tags-inner">
+                        </div>
+                    </div>
+                </div>
+                <div id="sidebar-footer-container">
+                    <div id="sidebar-footer">
+                        <ul>
+                            <li><a href="#" id="about-button"><i class="fa fa-fw fa-info-circle"></i> About / Contact</a></li>
+                            <li><i class="fa fa-fw fa-flash"></i> <strong>Yiff.co</strong> @version</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
+        <div id="sidebar-mini">
+            <div id="sidebar-mini-inner">
+                <span id="sidebar-logo-mini"><i class="fa fa-fw fa-heart"></i>Yiff.co</span>
+                <a href="#" id="random-mini-button"><i class="fa fa-fw fa-random"></i>Random</a>
+                <a href="#" id="show-sidebar-button"><i class="fa fa-fw fa-bars"></i>Menu</a>
+                <span id="sidebar-mini-reminder">
+                    Open the <strong><i class="fa fa-fw fa-bars"></i>Menu</strong> to change what images to look at, and discover more options!
+                </span>
+            </div>
+        </div>
+        <div id="view" class="full">
+        </div>
     </div>
-    
-    <environment names="Development">
-        <script src="/lib/jquery-2.2.3/dist/jquery.min.js"></script>
-    </environment>
-    <environment names="Staging,Production">
-        <script src="//code.jquery.com/jquery-2.2.3.min.js"></script>
-    </environment>
-    <environment names="Development,Staging,Production">
-        <script src="/lib/cookies.js"></script>
-        <script src="/js/site.js"></script>
-    </environment>
+
+    <div id="panel-overlay">
+        @Html.Partial("_AboutPanelPartial")
+        @Html.Partial("_HfmPanelPartial")
+        @Html.Partial("_WelcomePanelPartial")
+    </div>
+
+    <img id="image-preload" style="width: 0; height: 0;" />
+
+    <script src="//code.jquery.com/jquery-2.2.3.min.js"></script>
+    <script src="/js/site.js"></script>
 </body>
 </html>

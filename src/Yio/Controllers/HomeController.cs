@@ -10,16 +10,15 @@ namespace Yio.Controllers
 
         public IActionResult Index()
         {
-            ViewBag.Title = "Yiff.co";
-            ViewBag.ShowNav = "True";
-            ViewBag.Color = "#33FFB8";
-
-            return View();
+            return View ("Index");
         }
 
-        public IActionResult V2()
+        [Route("/{repo}")]
+        public IActionResult V2(string repository)
         {
-            return View ("v2");
+            ViewBag.Repository = repository;
+
+            return View ("Index");
         }
 
         public string Error()

@@ -64,19 +64,17 @@ namespace Yio.Controllers.ApiControllers
                     File file = fileTag.File;
                     List<FileTag> tagsForFile = await _fileTagRepository.GetFileTagsForFile(file.Id);
 
-                    var randomFile = AppSettingsConstant.FileEndpoint + file.Source + "/" + file.Filename;
-                
+                    var randomFile = "/" + file.Source + "/" + file.Filename;
+                    var randomFileWithEndpoint = AppSettingsConstant.FileEndpoint + file.Source + "/" + file.Filename;
+
                     randomFile = randomFile
                         .Replace("https://", "//")
                         .Replace("http://", "//");
 
-                    var returnObject = "{ ";
-                    returnObject += "\"url\": \"" + randomFile + "\" ";
-                    returnObject += "}";
-
                     GetRandomApiModel am = new GetRandomApiModel
                     {
-                        Url = randomFile
+                        Url = randomFileWithEndpoint,
+                        File = randomFile
                     };
 
                     return am;
@@ -127,7 +125,8 @@ namespace Yio.Controllers.ApiControllers
                 Name = "Yiff",
                 Default = "furry",
                 ShowNav = "true",
-                Repos = repos
+                Repos = repos,
+                Endpoint = AppSettingsConstant.FileEndpoint
             };
 
             return am;

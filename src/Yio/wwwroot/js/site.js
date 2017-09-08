@@ -1,153 +1,276 @@
-$(document).ready(function(){
-    var defaultRepo = "";
-    var currentFile = "";
+var currentRepo;
+var defaultRepo;
+var endpoint;
+var fileHistory = [];
+var hfmEnabled = false;
+var hfmTimeout;
+var nextFile;
 
-    var HFMInt = docCookies.getItem("HFMInt");
-    var HFMIntMS = HFMInt + "000";
-    if (HFMInt != null ) {
-        $("#btn_HFM").css("color", "red");
-        var HFMTimeout = setTimeout(function() {
-            window.location.reload(false);
-        }, HFMIntMS);
-    }
+$(document).ready(function() {
+    var hash = window.location.hash.substring(2);
 
-    $("#overlay_Click").click(function(e) {
-        e.preventDefault();
-        getFile();
-    });
+    ClickEvents();
+    RepositorySelectEvent();
+    SidebarToggleEvent();
 
-    $("#btn_RepoSwitch").click(function(e) {
-        e.preventDefault();
-        showPanel(true, "RepoSwitch");
-    });
+    ResizeTagsBox();
 
-    $("#btn_StartHFM").on("click", function() {
-        var int = $("#input_HFMInt").val();
-        docCookies.setItem("HFMInt", int);
-        window.location.reload(false);
-    });
-
-    $("#actions > a").click(function(e) {
-        e.preventDefault();
-        var clickedItem = $(this).attr("id").slice(4);
-
-        switch(clickedItem) {
-            case "RandomImage":
-                getFile();
-                break;
-            case "HFM":
-                if (HFMInt == null ) {
-                    showPanel(true, "HFM");
-                } else {
-                    docCookies.removeItem("HFMInt");
-                    clearTimeout(HFMTimeout);
-                    $("#btn_HFM").css("color", "");
-                }
-                break;
-            case "Direct":
-                window.location = window.location.protocol + currentFile;
-                break;
-            case "About":
-                showPanel(true, "About");
-                break;
-            default:
-                console.info("Function Not Implemented!");
-                break;
-        }
-    });
-
-    $(".panel-close > a").on("click", function(e) {
-        e.preventDefault();
-        showPanel(false, "all");
-    });
-
-    $(window).on('hashchange',function(){ 
-        getFile();
-    });
-
-    function getFile() {
-        var repo = "";
-
-        var hash = window.location.hash;
-        hash = hash.slice(2);
-
-        if(hash === "") {
-            repo = defaultRepo;
-        } else {
-            repo = hash;
-        }
-
-        $("#label_RepoSwitch").text(repo);
-        $("#label_RepoSwitch_2").text(repo);
-
-        $.ajax({
-            url: '/api/v1/random/' + repo.toLowerCase(),
-            type: 'GET',
-            contentType: "application/json; charset=utf-8",
-            dataType: 'json',
-            success: function (data)
-            {
-                document.body.style.backgroundImage = "url('" + data.url + "')";
-                currentFile = data.url;
-            },
-            failure: function (data)
-            {
-                // handle error
-            }
-        });
-    }
-
-    function getSite() {
-        $.ajax({
-            url: '/api/v1/site',
-            type: 'GET',
-            contentType: "application/json; charset=utf-8",
-            dataType: 'json',
-            success: function (data)
-            {
-                setupSite(data);
-            }
-        })
-    }
-
-    function setupSite(data) {
-        defaultRepo = data.default;
-
-        if(data.showNav === "False") {
-            $("#overlay_Panel").css("display", "none");
-        }
-
-        var repos = data.repos.split("|");
-
-        $.each(repos, function(index) {
-            $("#panel_RepoSwitch ul").append(
-                $("<li>", {}).append(
-                    $("<a>", { href: "#/" + repos[index].toLowerCase() }).text(
-                        repos[index]
-                    )
-                )
-            );
-        });
-
-        getFile();
-
-        $("#loadingOverlay").css("display", "none");
-    }
-
-    function showPanel(show, name) {
-        if(show == true) {
-            $("#overlay_Panel").css("display", "block");
-            $("#panel_" + name).css("display", "block");
-        } else {
-            if(name === "all") {
-                $("#overlay_Panel").css("display", "");
-                $(".panel").css("display", "");
-            } else {
-                $("#overlay_Panel").css("display", "");
-                $("#panel_" + name).css("display", "");
-            }
-        }
-    }
-
-    getSite();
+    if(hash === "") {
+        SetupSite(true);
+    } else {
+        SetupSite(false);
+    };
 });
+
+window.addEventListener('resize', function(event){
+    ResizeTagsBox();
+});
+
+window.addEventListener("hashchange", function(event) {
+    GetFile();
+});
+
+function ClickEvents() {
+    $("#about-button").click(function(e) {
+        e.preventDefault();
+        TogglePanel("about");
+    });
+
+    $("#about-panel-close").click(function(e) {
+        e.preventDefault(0);
+        TogglePanel("about");
+    });
+
+    $("#backward-button").click(function(e) {
+        e.preventDefault();
+
+        ToggleHfm();
+
+        fileHistory.pop();
+        var lastItem = fileHistory.pop();
+        
+        window.location.hash = "/" + lastItem;
+    });
+
+    $("#hfm-button").click(function(e) {
+        e.preventDefault();
+        TogglePanel("hfm");
+    });
+
+    $("#hfm-panel-close").click(function(e) {
+        e.preventDefault();
+        TogglePanel("hfm");
+    });
+
+    $("#random-button").click(function(e) {
+        e.preventDefault();
+        ToggleHfm();
+        GetRandomFile();
+    });
+
+    $("#random-mini-button").click(function(e) {
+        e.preventDefault();
+        ToggleHfm();
+        GetRandomFile();
+    });
+
+    $("#start-hfm-button").on("click", function() {
+        var int = $("#hfm-interval-input").val();
+        ToggleHfm(int);
+    });
+
+    $("#view").click(function() {
+        ToggleHfm();
+        GetRandomFile();
+    });
+}
+
+function GetFile() {
+    var currentFile = window.location.hash.substring(2);
+
+    $("#direct-button").attr("href", endpoint + currentFile);
+    $("#view").css("background-image", "url('" + endpoint + currentFile + "')");
+
+    StoreHistory(currentFile);
+};
+
+function GetRandomFile() {
+    $.ajax({
+        url: '/api/v1/random/' + currentRepo.toLowerCase(),
+        type: 'GET',
+        contentType: "application/json; charset=utf-8",
+        dataType: 'json',
+        success: function (data)
+        {
+            if(nextFile) {
+                window.location.hash = nextFile;
+                PreloadFile(false);
+            } else {
+                window.location.hash = data.file;
+                PreloadFile(false);
+            }
+        },
+        failure: function (data)
+        {
+            // handle error
+        }
+    });
+}
+
+function PreloadFile(keepTrying) {
+    $.ajax({
+        url: '/api/v1/random/' + currentRepo.toLowerCase(),
+        type: 'GET',
+        contentType: "application/json; charset=utf-8",
+        dataType: 'json',
+        success: function (data)
+        {
+            if(data.file.endsWith(".png") ||
+                data.file.endsWith(".jpg") ||
+                data.file.endsWith(".gif")) {
+                    $("#image-preload").attr("src", data.url);
+                    nextFile = data.file;
+            } else {
+                if(keepTrying) {
+                    PreloadFile(true);
+                } else {
+                    nextFile = "";
+                }
+            }
+        },
+        failure: function (data)
+        {
+            // handle error
+        }
+    });
+}
+
+function RepositorySelectEvent() {
+    $("#repository-selector").change(function() {
+        currentRepo = $("#repository-selector").val();
+        PreloadFile();
+        GetRandomFile();
+    });
+}
+
+function ResizeTagsBox() {
+    $("#sidebar-tags-inner").css("height", "0");
+
+    var requiredHeight = $("#sidebar-tags").height() + "px";
+
+    $("#sidebar-tags-inner").css("height", requiredHeight);
+};
+
+function SetupSite(loadFile) {
+    $.ajax({
+        url: '/api/v1/site',
+        type: 'GET',
+        contentType: "application/json; charset=utf-8",
+        dataType: 'json',
+        success: function (data)
+        {
+            if(window.location.pathname === "/") {
+                currentRepo = data.default;
+            } else {
+                currentRepo = window.location.pathname.slice(1);
+                if(window.location.hash) {
+                    history.pushState(null, null, '/' + window.location.hash);
+                } else {
+                    history.pushState(null, null, '/');
+                }
+            }
+
+            defaultRepo = data.default;
+            endpoint = data.endpoint;
+
+            var repos = data.repos.split("|");
+
+            $.each(repos, function(index) {
+                $("#repository-selector").append(
+                    $("<option>", {}).append(
+                        repos[index].toLowerCase()
+                    )
+                );
+            });
+
+            $("#repository-selector").val(currentRepo.toLowerCase());
+
+            if(loadFile) {
+                GetRandomFile();
+            } else {
+                GetFile();
+                PreloadFile(true);
+            }
+        }
+    });
+};
+
+function SidebarToggleEvent() {
+    $("#show-sidebar-button").click(function(e) {
+        e.preventDefault(0);
+        ToggleSidebar();
+    })
+
+    $("#hide-sidebar-button").click(function(e) {
+        e.preventDefault(0);
+        ToggleSidebar();
+    });
+};
+
+function StoreHistory(file) {
+    fileHistory.push(file);
+    
+    if(fileHistory.length === 1) {
+        $(".backward-button-item").addClass("disabled");
+    } else {
+        $(".backward-button-item").removeClass("disabled");
+    }
+};
+
+function ToggleHfm(interval) {
+    if(interval) {
+        if(hfmEnabled) {
+            $("#hfm-button .fa").css("color", "inherit");
+            hfmEnabled = false;
+            clearInterval(hfmTimeout);
+        } else {
+            $("#hfm-button .fa").css("color", "red");
+            hfmEnabled = true;
+            hfmTimeout = setInterval(function() {
+                GetRandomFile();
+            }, interval*1000);
+        }
+    } else {
+        $("#hfm-button .fa").css("color", "inherit");
+        hfmEnabled = false;
+        clearInterval(hfmTimeout);
+    }
+} 
+
+function TogglePanel(name) {
+    if($("#" + name + "-panel").css("display") === "block") {
+        $("#panel-overlay").css("display", "");
+        $("#" + name + "-panel").css("display", "");
+    } else {
+        $("#panel-overlay").css("display", "block");
+        $("#" + name + "-panel").css("display", "block");
+    }
+}
+
+function ToggleSidebar() {
+    ResizeTagsBox();
+
+    if(!$("#sidebar").hasClass("visible")) {
+        $("#sidebar-mini-reminder").addClass("invisible");
+    }
+
+    if($("#sidebar").hasClass("visible")) {
+        $("#sidebar-mini").removeClass("hidden");
+        $("#sidebar").removeClass("visible");
+        $("#view").addClass("full");
+    } else {
+        $("#sidebar-mini").addClass("hidden");
+        $("#sidebar").addClass("visible");
+        $("#view").removeClass("full");
+    }
+};
