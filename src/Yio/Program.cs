@@ -39,13 +39,13 @@ namespace Yio
             }
 
             StartupUtilities.WriteInfo("starting App");
-            BuildWebHost(args).Run();
+            BuildWebHost().Run();
 
             Console.ResetColor();
         }
 
-        public static IWebHost BuildWebHost(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
+        public static IWebHost BuildWebHost() =>
+            WebHost.CreateDefaultBuilder()
                 .UseUrls("http://0.0.0.0:" + _port.ToString() + "/")
                 .UseStartup<Startup>()
                 .Build();
