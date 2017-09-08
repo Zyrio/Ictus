@@ -6,6 +6,8 @@ using Microsoft.Extensions.Options;
 using Yio.Data.Constants;
 using Yio.Data.Models;
 using Yio.Data.Repositories.Interfaces;
+using Yio.Models.ApiModels;
+using Yio.Models.ApiModels.ApiV1Models;
 
 // Please don't judge me.
 // I was either drunk or tired when I wrote this. Probably both.
@@ -35,7 +37,7 @@ namespace Yio.Controllers.ApiControllers
 
         [HttpGet]
         [Route("random/{repo}")]
-        public async Task<String> GetRandom(String repo)
+        public async Task<GetRandomApiModel> GetRandom(String repo)
         {
             Response.Headers.Add("Content-Type", "application/json");
             Response.Headers.Add("Access-Control-Allow-Headers", "Authorization, Content-Type");
@@ -46,7 +48,14 @@ namespace Yio.Controllers.ApiControllers
 
             if (String.IsNullOrEmpty(repo)){
                 Response.StatusCode = 400;
-                return "{ \"message\": \"" + "Supplied parameters are incorrect" + "\", \"status\": 400 }";
+
+                GetRandomApiModel am = new GetRandomApiModel
+                {
+                    Message = "Supplied parameters are incorrect",
+                    Status = 400
+                };
+
+                return am;
             }
 
             if(!String.IsNullOrEmpty("repo")) {
@@ -67,22 +76,35 @@ namespace Yio.Controllers.ApiControllers
                     returnObject += "\"url\": \"" + randomFile + "\" ";
                     returnObject += "}";
 
-                    return returnObject;
+                    GetRandomApiModel am = new GetRandomApiModel
+                    {
+                        Url = randomFile
+                    };
+
+                    return am;
                 } catch {
                     Response.StatusCode = 404;
-                    return "{ \"message\": \"" + "Repository does not exist" + "\", \"status\": 404 }";
+
+                    GetRandomApiModel am = new GetRandomApiModel
+                    {
+                        Message = "Repository does not exist",
+                        Status = 400
+                    };
+
+                    return am;
                 }
             }
 
             Response.StatusCode = 500;
-            return "{ \"message\": \"" + "He'd dead, Jim!" + "\", \"status\": 500 }";
+
+            return new GetRandomApiModel {};
         }
 
         // /api/v1/site
         
         [HttpGet]
         [Route("site")]
-        public async Task<String> GetSite()
+        public async Task<GetSiteApiModel> GetSite()
         {
             List<Tag> tags = await _tagRepository.GetTagsOrdered();
             string repos = null;
@@ -102,14 +124,15 @@ namespace Yio.Controllers.ApiControllers
             Response.Headers.Add("Pragma", "no-cache");
             Response.Headers.Add("Expires", "0");
 
-            var returnObject = "{ ";
-            returnObject += "\"name\": \"" + "Yiff.co" + "\",";
-            returnObject += "\"default\": \"" + "furry" + "\",";
-            returnObject += "\"showNav\": \"" + "true" + "\",";
-            returnObject += "\"repos\": \"" + repos + "\"";
-            returnObject += "}";
+            GetSiteApiModel am = new GetSiteApiModel
+            {
+                Name = "Yiff",
+                Default = "furry",
+                ShowNav = "true",
+                Repos = repos
+            };
 
-            return returnObject;
+            return am;
         }
     }
 }
