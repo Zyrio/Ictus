@@ -185,25 +185,7 @@ Link a file to a tag, thus creating a new tag if the tag doesn't exist
 
 ##### Return
 
-```
-[
-	{
-		id: "7dca14f4-1619-4c47-76f4-08d460f952aa",
-		name: "sports",
-		fileCount: 15916
-	},
-	{
-		id: "0e0491a2-0cde-4a69-6cfd-08d460ae02bc",
-		name: "furry",
-		fileCount: 14209
-	},
-	{
-		id: "afe135d3-a624-49af-76f3-08d460f952aa",
-		name: "shota",
-		fileCount: 679
-	},
-...
-```
+(nothing)
 
 ### /api/v2/tags/default
 
