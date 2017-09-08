@@ -23,6 +23,7 @@ namespace Yio
 
             AppSettingsConstant.FileEndpoint = Configuration.GetSection("AppSettings").GetSection("FileEndpoint").Value;
             AppSettingsConstant.FileStorage = Configuration.GetSection("AppSettings").GetSection("FileStorage").Value;
+            AppSettingsConstant.GoogleAnalytics = Configuration.GetSection("AppSettings").GetSection("GoogleAnalytics").Value;
         }
 
         public IConfiguration Configuration { get; }

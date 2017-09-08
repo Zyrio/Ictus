@@ -5,5 +5,6 @@ namespace Yio.Data.Constants
     {
         public static string FileEndpoint { get; set; }
         public static string FileStorage { get; set; }
+        public static string GoogleAnalytics { get; set; }
     }
 }

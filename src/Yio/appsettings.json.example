@@ -1,7 +1,8 @@
 {
     "AppSettings": {
         "FileEndpoint": "https://yiff.fs.zyr.io/",
-        "FileStorage": "/mnt/smb/Alfa01~Z.V.R.Web/data/yiff.co/"
+        "FileStorage": "/mnt/smb/Alfa01~Z.V.R.Web/data/yiff.co/",
+        "GoogleAnalytics": "UA-XXXXXXXX-5"
     },
     "ConnectionStrings": {
         "DefaultConnection": "..."
