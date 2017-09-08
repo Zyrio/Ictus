@@ -12,6 +12,8 @@ using Yio.Data;
 using Yio.Data.Constants;
 using Yio.Data.Repositories;
 using Yio.Data.Repositories.Interfaces;
+using Yio.Utilities;
+using Yio.Utilities.Interfaces;
 
 namespace Yio
 {
@@ -40,6 +42,7 @@ namespace Yio
 
             services.AddTransient<IFileRepository, FileRepository>();
             services.AddTransient<IFileTagRepository, FileTagRepository>();
+            services.AddTransient<IRandomGeneratorUtilities, RandomGeneratorUtilities>();
             services.AddTransient<ITagRepository, TagRepository>();
         }
 

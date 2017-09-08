@@ -77,9 +77,17 @@ namespace Yio.Data.Repositories
 
         public async Task<List<FileTag>> GetFileTagsForFile(Guid fileId)
         {
+            _dbContext.Tags.Load();
+
             return await _dbContext
                 .FileTags
                 .Where(ft => ft.File.Id == fileId)
+                .Select(ft => new FileTag {
+                    Id = ft.Id,
+                    Hits = ft.Hits,
+                    InUse = ft.InUse,
+                    Tag = ft.Tag
+                })
                 .ToListAsync();
         }
 
