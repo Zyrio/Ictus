@@ -1,0 +1,18 @@
+{
+    "AppSettings": {
+        "FileEndpoint": "https://yiff.fs.zyr.io/",
+        "FileStorage": "/mnt/smb/Alfa01~Z.V.R.Web/data/yiff.co/"
+    },
+    "ConnectionStrings": {
+        "DefaultConnection": "..."
+    },
+    "Logging": {
+        "IncludeScopes": false,
+        "LogLevel": {
+            "Default": "Debug",
+            "System": "Information",
+            "Microsoft": "Information"
+        }
+    }
+}
+
