@@ -247,21 +247,6 @@ body {
         margin-right: 5px;
     }
 
-#sidebar-mini-reminder {
-    color: #C4C4C4;
-    text-shadow: 0 0 10px #000000;
-    font-size: 12px;
-    margin: 5px 0 0 3px;
-    display: block;
-    transition: all 0.5s linear;
-}
-
-    #sidebar-mini-reminder strong {
-        font-family: 'Oswald', sans-serif;
-        font-weight: 300;
-        text-transform: uppercase;
-    }
-
 #view {
     display: table-cell;
     height: 100%;

@@ -8,6 +8,11 @@ var nextFile;
 
 $(document).ready(function() {
     var hash = window.location.hash.substring(2);
+    const mobileView = window.matchMedia( "(max-width: 480px)" );
+
+    if(!mobileView.matches) {
+        ToggleSidebar();
+    }
 
     ClickEvents();
     RepositorySelectEvent();
@@ -226,50 +231,6 @@ function SetupSite(loadFile) {
     });
 }
 
-function SetupSiteOld(loadFile) {
-    $.ajax({
-        url: '/api/v1/site',
-        type: 'GET',
-        contentType: "application/json; charset=utf-8",
-        dataType: 'json',
-        success: function (data)
-        {
-            if(window.location.pathname === "/") {
-                currentRepo = data.default;
-            } else {
-                currentRepo = window.location.pathname.slice(1);
-                if(window.location.hash) {
-                    history.pushState(null, null, '/' + window.location.hash);
-                } else {
-                    history.pushState(null, null, '/');
-                }
-            }
-
-            defaultRepo = data.default;
-            endpoint = data.endpoint;
-
-            var repos = data.repos.split("|");
-
-            $.each(repos, function(index) {
-                $("#repository-selector").append(
-                    $("<option>", {}).append(
-                        repos[index].toLowerCase()
-                    )
-                );
-            });
-
-            $("#repository-selector").val(currentRepo.toLowerCase());
-
-            if(loadFile) {
-                GetRandomFile();
-            } else {
-                GetFile();
-                PreloadFile(true);
-            }
-        }
-    });
-};
-
 function SidebarToggleEvent() {
     $("#show-sidebar-button").click(function(e) {
         e.preventDefault(0);
@@ -330,10 +291,6 @@ function TogglePanel(name) {
 
 function ToggleSidebar() {
     ResizeTagsBox();
-
-    if(!$("#sidebar").hasClass("visible")) {
-        $("#sidebar-mini-reminder").addClass("invisible");
-    }
 
     if($("#sidebar").hasClass("visible")) {
         $("#sidebar-mini").removeClass("hidden");
