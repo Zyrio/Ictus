@@ -11,7 +11,7 @@ using Yio.Data.Repositories.Interfaces;
 // I was either drunk or tired when I wrote this. Probably both.
 //  -- Ducky
 
-namespace Yio.WebappV2.Controllers.ApiControllers
+namespace Yio.Controllers.ApiControllers
 {
     [Route("/api/v1")]
     public class ApiV1Controller : Controller
