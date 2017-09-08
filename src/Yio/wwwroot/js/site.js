@@ -225,6 +225,14 @@ function StoreHistory(file) {
     } else {
         $(".backward-button-item").removeClass("disabled");
     }
+
+    // prunce history if there is 100 items, just so
+    // we don't clutter up the user's memory
+    if(fileHistory.length === 101) {
+        fileHistory.shift();
+    }
+
+    console.log(fileHistory);
 };
 
 function ToggleHfm(interval) {
