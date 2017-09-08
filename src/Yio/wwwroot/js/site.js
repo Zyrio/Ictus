@@ -54,7 +54,12 @@ function ClickEvents() {
 
     $("#hfm-button").click(function(e) {
         e.preventDefault();
-        TogglePanel("hfm");
+
+        if(hfmEnabled) {
+            ToggleHfm();
+        } else {
+            TogglePanel("hfm");
+        }
     });
 
     $("#hfm-panel-close").click(function(e) {
@@ -77,6 +82,7 @@ function ClickEvents() {
     $("#start-hfm-button").on("click", function() {
         var int = $("#hfm-interval-input").val();
         ToggleHfm(int);
+        TogglePanel("hfm");
     });
 
     $("#view").click(function() {
@@ -88,25 +94,38 @@ function ClickEvents() {
 function GetFile() {
     var currentFile = window.location.hash.substring(2);
 
-    $("#direct-button").attr("href", endpoint + currentFile);
-    $("#view").css("background-image", "url('" + endpoint + currentFile + "')");
+    $.ajax({
+        url: '/api/v2/files/' + currentFile,
+        type: 'GET',
+        contentType: "application/json; charset=utf-8",
+        dataType: 'json',
+        success: function (data)
+        {
+            $("#direct-button").attr("href", data.location);
+            $("#view").css("background-image", "url('" + data.location + "')");
 
-    StoreHistory(currentFile);
+            StoreHistory(currentFile);
+        },
+        failure: function (data)
+        {
+            // handle error
+        }
+    });
 };
 
 function GetRandomFile() {
     $.ajax({
-        url: '/api/v1/random/' + currentRepo.toLowerCase(),
+        url: '/api/v2/random/' + currentRepo.toLowerCase(),
         type: 'GET',
         contentType: "application/json; charset=utf-8",
         dataType: 'json',
         success: function (data)
         {
             if(nextFile) {
-                window.location.hash = nextFile;
+                window.location.hash = "/" + nextFile;
                 PreloadFile(false);
             } else {
-                window.location.hash = data.file;
+                window.location.hash = "/" + data.id;
                 PreloadFile(false);
             }
         },
@@ -119,17 +138,17 @@ function GetRandomFile() {
 
 function PreloadFile(keepTrying) {
     $.ajax({
-        url: '/api/v1/random/' + currentRepo.toLowerCase(),
+        url: '/api/v2/random/' + currentRepo.toLowerCase(),
         type: 'GET',
         contentType: "application/json; charset=utf-8",
         dataType: 'json',
         success: function (data)
         {
-            if(data.file.endsWith(".png") ||
-                data.file.endsWith(".jpg") ||
-                data.file.endsWith(".gif")) {
-                    $("#image-preload").attr("src", data.url);
-                    nextFile = data.file;
+            if(data.location.endsWith(".png") ||
+                data.location.endsWith(".jpg") ||
+                data.location.endsWith(".gif")) {
+                    $("#image-preload").attr("src", data.location);
+                    nextFile = data.id;
             } else {
                 if(keepTrying) {
                     PreloadFile(true);
@@ -162,6 +181,52 @@ function ResizeTagsBox() {
 };
 
 function SetupSite(loadFile) {
+    $.ajax({
+        url: '/api/v2/tags/default',
+        type: 'GET',
+        contentType: "application/json; charset=utf-8",
+        dataType: 'json',
+        success: function (data)
+        {
+            if(window.location.pathname === "/") {
+                currentRepo = data.name;
+            } else {
+                currentRepo = window.location.pathname.slice(1);
+                if(window.location.hash) {
+                    history.pushState(null, null, '/' + window.location.hash);
+                } else {
+                    history.pushState(null, null, '/');
+                }
+            }
+
+            defaultRepo = data.name;
+
+            $.ajax({
+                url: '/api/v2/tags',
+                type: 'GET',
+                contentType: "application/json; charset=utf-8",
+                dataType: 'json',
+                success: function (dataTags)
+                {
+                    $.each(dataTags, function(index) {
+                        $("#repository-selector").append("<option value='" + dataTags[index].name + "'>" + dataTags[index].name + " (" + dataTags[index].fileCount + ")" + "</option>");
+                    });
+        
+                    $("#repository-selector").val(currentRepo.toLowerCase());
+        
+                    if(loadFile) {
+                        GetRandomFile();
+                    } else {
+                        GetFile();
+                        PreloadFile(true);
+                    }
+                }
+            });
+        }
+    });
+}
+
+function SetupSiteOld(loadFile) {
     $.ajax({
         url: '/api/v1/site',
         type: 'GET',
@@ -231,8 +296,6 @@ function StoreHistory(file) {
     if(fileHistory.length === 101) {
         fileHistory.shift();
     }
-
-    console.log(fileHistory);
 };
 
 function ToggleHfm(interval) {

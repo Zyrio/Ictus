@@ -35,7 +35,15 @@ namespace Yio.Data.Repositories
         {
             return await _dbContext
                 .Tags
-                .OrderBy(r => r.Name)
+                .OrderBy(t => t.Name)
+                .ToListAsync();
+        }
+
+        public async Task<List<Tag>> GetTagsOrderedByCount()
+        {
+            return await _dbContext
+                .Tags
+                .OrderByDescending(t => t.FileCount)
                 .ToListAsync();
         }
     }

@@ -172,7 +172,7 @@ namespace Yio.Controllers.ApiControllers
         [Route("tags")]
         public async Task<List<Tag>> GetTags()
         {
-            var tags = await _tagRepository.GetTags();
+            var tags = await _tagRepository.GetTagsOrderedByCount();
 
             return tags;
         }

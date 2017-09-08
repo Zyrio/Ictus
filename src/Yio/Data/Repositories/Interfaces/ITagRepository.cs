@@ -9,5 +9,6 @@ namespace Yio.Data.Repositories.Interfaces
         Task<Tag> GetTagByName(string name);
         Task<List<Tag>> GetTags();
         Task<List<Tag>> GetTagsOrdered();
+        Task<List<Tag>> GetTagsOrderedByCount();
     }
 }
