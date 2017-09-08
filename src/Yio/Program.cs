@@ -46,6 +46,7 @@ namespace Yio
 
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
+                .UseUrls("http://0.0.0.0:" + _port.ToString() + "/")
                 .UseStartup<Startup>()
                 .Build();
     }
