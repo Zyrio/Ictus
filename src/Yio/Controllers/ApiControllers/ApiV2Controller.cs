@@ -193,6 +193,17 @@ namespace Yio.Controllers.ApiControllers
             return Ok();
         }
 
+        // /api/v2/tags/default
+
+        [HttpGet]
+        [Route("tags/default")]
+        public async Task<Tag> GetDefaultTag()
+        {
+            Tag tag = await _tagRepository.GetTagByName("furry");
+
+            return tag;
+        }
+
         // /api/v2/votes
 
         [HttpPost]
