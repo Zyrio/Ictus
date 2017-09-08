@@ -6,5 +6,6 @@ namespace Yio.Data.Models
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
+        public int FileCount { get; set; }
     }
 }
