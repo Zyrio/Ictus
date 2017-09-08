@@ -137,7 +137,7 @@ _(missing section)_
 
 ### /api/v2/tags
 
-#### GET: /api/v2/files/tags
+#### GET: /api/v2/tags
 
 ##### Parameters
 
@@ -165,7 +165,7 @@ _(missing section)_
 ...
 ```
 
-#### POST: /api/v2/files/tags
+#### POST: /api/v2/tags
 
 Link a file to a tag, thus creating a new tag if the tag doesn't exist
 
@@ -189,7 +189,7 @@ Link a file to a tag, thus creating a new tag if the tag doesn't exist
 
 ### /api/v2/tags/default
 
-#### GET: /api/v2/files/tags/default
+#### GET: /api/v2/tags/default
 
 Get the default **tag/repository** for the site.
 
@@ -211,7 +211,7 @@ Get the default **tag/repository** for the site.
 - `name` The name of the tag/repository
 - `fileCount` The amount of files currently held under this tag
 
-### /api/v2/uploads
+### /api/v2/files/uploads
 
 #### POST: /api/v2/files/uploads
 
