@@ -1,0 +1,29 @@
+@{
+    var version = "";
+    var versionName = Yio.Data.Constants.VersionConstant.Codename.ToString();
+
+    if(Yio.Data.Constants.VersionConstant.Patch == 0) {
+        version = Yio.Data.Constants.VersionConstant.Release.ToString();
+    } else {
+        version = Yio.Data.Constants.VersionConstant.Release.ToString() + "." +
+            Yio.Data.Constants.VersionConstant.Patch.ToString();
+    }
+}
+
+<div class="panel" id="about-panel">
+    <div class="panel-inner">
+        <div class="panel-close">
+            <a href="#"><i class="fa fa-fw fa-times"></i></a>
+        </div>
+        <h1>About</h1>
+        <p>
+            <strong>Curl your paw round your dick, and get clicking!</strong>
+        </p>
+        <p>
+            Filled with furry (and more) porn, stripped from many sources &mdash; tumblr, e621, 4chan, 8chan, etc. &mdash; Yiff.co is the never-ending full-width stream of NSFW images. Built by <a href="https://zyr.io">Zyrio</a>.
+        </p>
+        <p>
+            Running on version <strong>@version '@(versionName)'</strong>
+        </p>
+    </div>
+</div>
