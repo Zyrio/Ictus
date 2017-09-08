@@ -13,11 +13,9 @@ namespace Yio.Controllers
             return View ("Index");
         }
 
-        [Route("/{repo}")]
+        [Route("/{repository}")]
         public IActionResult V2(string repository)
         {
-            ViewBag.Repository = repository;
-
             return View ("Index");
         }
 
