@@ -1,3 +1,15 @@
+@{
+    var version = "";
+    var versionName = Yio.Data.Constants.VersionConstant.Codename.ToString();
+
+    if(Yio.Data.Constants.VersionConstant.Patch == 0) {
+        version = Yio.Data.Constants.VersionConstant.Release.ToString();
+    } else {
+        version = Yio.Data.Constants.VersionConstant.Release.ToString() + "." +
+            Yio.Data.Constants.VersionConstant.Patch.ToString();
+    }
+}
+
 <!DOCTYPE html>
 <head>
 	<title>@ViewBag.Title</title>
@@ -58,6 +70,9 @@
                 </p>
                 <p>
                     Filled with furry (and more) porn, stripped from many sources &mdash; tumblr, e621, 4chan, 8chan, etc. &mdash; Yiff.co is the never-ending full-width stream of NSFW images. Built by <a href="https://zyr.io">Zyrio</a>.
+                </p>
+                <p>
+                    Running on version <strong>@version '@(versionName)'</strong>
                 </p>
                 <!--<p>
                     Something wrong? Contact <a href="mailto:zyrio@zyr.io">zyrio&#64;zyr.io</a>.
