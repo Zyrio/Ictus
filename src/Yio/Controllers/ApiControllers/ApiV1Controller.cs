@@ -67,7 +67,7 @@ namespace Yio.Controllers.ApiControllers
                     var randomFile = "/" + file.Source + "/" + file.Filename;
                     var randomFileWithEndpoint = AppSettingsConstant.FileEndpoint + file.Source + "/" + file.Filename;
 
-                    randomFile = randomFile
+                    randomFileWithEndpoint = randomFileWithEndpoint
                         .Replace("https://", "//")
                         .Replace("http://", "//");
 
