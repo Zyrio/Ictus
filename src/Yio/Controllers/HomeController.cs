@@ -17,6 +17,11 @@ namespace Yio.Controllers
             return View();
         }
 
+        public IActionResult V2()
+        {
+            return View ("v2");
+        }
+
         public string Error()
         {
             return "If you can see this message, something has gone terribly wrong.";
