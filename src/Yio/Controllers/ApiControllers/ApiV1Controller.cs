@@ -9,9 +9,7 @@ using Yio.Data.Repositories.Interfaces;
 using Yio.Models.ApiModels;
 using Yio.Models.ApiModels.ApiV1Models;
 
-// Please don't judge me.
-// I was either drunk or tired when I wrote this. Probably both.
-//  -- Ducky
+// Kill me.
 
 namespace Yio.Controllers.ApiControllers
 {
