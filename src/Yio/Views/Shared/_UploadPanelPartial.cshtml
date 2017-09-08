@@ -1,0 +1,39 @@
+<div class="panel" id="upload-panel">
+    <div class="panel-inner">
+        <div class="panel-close">
+            <a href="#" id="upload-panel-close"><i class="fa fa-fw fa-times"></i></a>
+        </div>
+        <h1>Upload</h1>
+        <p>
+            <table class="confbox" style="width: 100%;">
+                <tr>
+                    <td>File:</td>
+                    <td colspan="3">
+                        <form id="upload-form">
+                            <input type="file" style="width: 100%; box-sizing: border-box;" />
+                        </form>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                    </td>
+                    <td colspan="3" id="upload-tag-collection">
+                        <em id="upload-tag-collection-placeholder">Select tags...</em>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 80px;">Add tag:</td>
+                    <td style="width: 1px;"><select id="upload-tag-selector"></select></td>
+                    <td><input style="width: 100%; box-sizing: border-box;" id="upload-tag-custom" placeholder="Custom tag" /></td>
+                    <td style="width: 50px;"><button style="width: 100%;" id="upload-tag-add">Add</button></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td colspan="3">
+                        <button id="upload-submit">Upload</button>
+                    </td>
+                </tr>
+            </table>
+        </p>
+    </div>
+</div>
