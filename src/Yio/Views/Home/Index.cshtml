@@ -42,7 +42,7 @@
                 </div>
                 <div id="sidebar-search-container">
                     <div id="sidebar-search">
-                        <span>Select Repository:</span>
+                        <span>Select Tag:</span>
                         <select id="repository-selector">
                         </select>
                     </div>
@@ -54,7 +54,7 @@
                             <li class="backward-button-item disabled"><a id="backward-button" href="#"><i class="fa fa-fw fa-backward"></i> Previous File</a></li>
                             <li class="hfm-button-item"><a id="hfm-button" href="#"><i class="fa fa-fw fa-mouse-pointer"></i> Auto-Click</a></li>
                             <li class="direct-button-item"><a id="direct-button" href="#"><i class="fa fa-fw fa-link"></i> Direct Link</a></li>
-                            <li class="upload-button-item disabled"><a href="#"><i id="upload-button" class="fa fa-fw fa-upload"></i> Upload</a></li>
+                            <li class="upload-button-item disabled"><a id="upload-button" href="#"><i class="fa fa-fw fa-upload"></i> Upload</a></li>
                         </ul>
                     </div>
                 </div>
@@ -88,6 +88,7 @@
     <div id="panel-overlay">
         @Html.Partial("_AboutPanelPartial")
         @Html.Partial("_HfmPanelPartial")
+        @Html.Partial("_UploadPanelPartial")
         @Html.Partial("_WelcomePanelPartial")
     </div>
 

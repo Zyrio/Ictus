@@ -90,9 +90,73 @@ function ClickEvents() {
         TogglePanel("hfm");
     });
 
+    $("#upload-button").click(function(e) {
+        e.preventDefault();
+        TogglePanel("upload");
+    });
+
+    $("#upload-panel-close").click(function(e) {
+        e.preventDefault();
+        TogglePanel("upload");
+    });
+
     $("#view").click(function() {
         ToggleHfm();
         GetRandomFile();
+    });
+
+    $("#upload-submit").click(function() {
+        Upload_UploadFile();
+    });
+
+    $("#upload-tag-add").click(function() {
+        Upload_AddTag();
+    });
+}
+
+function Upload_AddTag() {
+    $("#upload-tag-collection-placeholder").css("display", "none");
+    if($("#upload-tag-custom").val()) {
+        var tag = $("#upload-tag-custom").val().replace(/ /g, "-")
+        if(!$("#upload-tag-selected-" + tag).length) {
+            $("#upload-tag-collection").append("<span class='upload-tag-selected' id='upload-tag-selected-" + tag + "'>" + tag + " <a class='upload-tag-remove' id='upload-tag-remove-" + tag + "' href='#'>&times;</a></span>")
+        }
+    } else {
+        var tag = $("#upload-tag-selector").val();
+        if(!$("#upload-tag-selected-" + tag).length) {
+            $("#upload-tag-collection").append("<span class='upload-tag-selected' id='upload-tag-selected-" + tag + "'>" + tag + " <a class='upload-tag-remove' id='upload-tag-remove-" + tag + "' href='#'>&times;</a></span>")
+        }
+    }
+
+    $(".upload-tag-remove").click(function(e) {
+        e.preventDefault();
+
+        var tag = $(this).attr("id").replace("upload-tag-remove-", "");
+        $("#upload-tag-selected-" + tag).remove();
+        
+        if(!$(".upload-tag-selected").length) {
+            $("#upload-tag-collection-placeholder").css("display", "");
+        }
+    })
+}
+
+function Upload_UploadFile() {
+    $("#upload-panel-close").css("display", "none");
+
+    $.ajax({
+        url: '/api/v2/files',
+        type: 'POST',
+
+        data: new FormData($('#upload-form')[0]),
+
+        cache: false,
+        contentType: false,
+        processData: false,
+
+        success: function(data)
+        {
+            console.log(data);
+        }
     });
 }
 
@@ -215,6 +279,7 @@ function SetupSite(loadFile) {
                 {
                     $.each(dataTags, function(index) {
                         $("#repository-selector").append("<option value='" + dataTags[index].name + "'>" + dataTags[index].name + " (" + dataTags[index].fileCount + ")" + "</option>");
+                        $("#upload-tag-selector").append("<option value='" + dataTags[index].name + "'>" + dataTags[index].name + " (" + dataTags[index].fileCount + ")" + "</option>");
                     });
         
                     $("#repository-selector").val(currentRepo.toLowerCase());
