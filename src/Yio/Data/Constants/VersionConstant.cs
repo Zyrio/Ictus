@@ -2,9 +2,9 @@
 namespace Yio.Data.Constants {
     public class VersionConstant
     {
-        public static int Release = 1701;
-        public static int Patch = 5;
-        public static string Codename = "Frisky Fox";
+        public static int Release = 1702;
+        public static int Patch = 0;
+        public static string Codename = "Kinky Kiwi";
         public static bool Unstable = false;
     }
 }
