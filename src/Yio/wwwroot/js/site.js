@@ -46,6 +46,16 @@ function ClickEvents() {
         TogglePanel("about");
     });
 
+    $("#apps-button").click(function(e) {
+        e.preventDefault(0);
+        TogglePanel("apps");
+    });
+
+    $("#apps-panel-close").click(function(e) {
+        e.preventDefault(0);
+        TogglePanel("apps");
+    });
+
     $("#backward-button").click(function(e) {
         e.preventDefault();
 
