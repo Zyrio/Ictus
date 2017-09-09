@@ -137,7 +137,7 @@ _(missing section)_
 
 ### /api/v2/tags
 
-#### GET: /api/v2/files/tags
+#### GET: /api/v2/tags
 
 ##### Parameters
 
@@ -165,7 +165,7 @@ _(missing section)_
 ...
 ```
 
-#### POST: /api/v2/files/tags
+#### POST: /api/v2/tags
 
 Link a file to a tag, thus creating a new tag if the tag doesn't exist
 
@@ -185,29 +185,11 @@ Link a file to a tag, thus creating a new tag if the tag doesn't exist
 
 ##### Return
 
-```
-[
-	{
-		id: "7dca14f4-1619-4c47-76f4-08d460f952aa",
-		name: "sports",
-		fileCount: 15916
-	},
-	{
-		id: "0e0491a2-0cde-4a69-6cfd-08d460ae02bc",
-		name: "furry",
-		fileCount: 14209
-	},
-	{
-		id: "afe135d3-a624-49af-76f3-08d460f952aa",
-		name: "shota",
-		fileCount: 679
-	},
-...
-```
+(nothing)
 
 ### /api/v2/tags/default
 
-#### GET: /api/v2/files/tags/default
+#### GET: /api/v2/tags/default
 
 Get the default **tag/repository** for the site.
 
@@ -229,7 +211,7 @@ Get the default **tag/repository** for the site.
 - `name` The name of the tag/repository
 - `fileCount` The amount of files currently held under this tag
 
-### /api/v2/uploads
+### /api/v2/files/uploads
 
 #### POST: /api/v2/files/uploads
 
