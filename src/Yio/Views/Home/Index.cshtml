@@ -68,7 +68,12 @@
                     <div id="sidebar-footer">
                         <ul>
                             <li><a href="#" id="about-button"><i class="fa fa-fw fa-info-circle"></i> About / Contact</a></li>
-                            <li><i class="fa fa-fw fa-flash"></i> <strong>Yiff.co</strong> @version</li>
+                            <environment names="Development">
+                                <li><i class="fa fa-fw fa-flash"></i> <strong>Yiff.co</strong> @version-dev</li>
+                            </environment>
+                            <environment names="Staging,Production">
+                                <li><i class="fa fa-fw fa-flash"></i> <strong>Yiff.co</strong> @version</li>
+                            </environment>
                         </ul>
                     </div>
                 </div>
