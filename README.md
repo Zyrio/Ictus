@@ -46,10 +46,10 @@ Yio's versioning is split up into two parts (although, technically three):
 `{1}{2}.{3}`
 
  - `{1}` Short-hand year (e.g. 2017 becomes 17)
- - `{2}` Release number; an incrementing number, with one leading zero, starting at 1 (e.g. 1 becomes 01). This increments everytime there is a new/removed feature, and resets everytime `{1}` increments.
+ - `{2}` Release number; an incrementing number, with one leading zero, starting at 1 (e.g. 1 becomes 01). Passing 99 does not reset it back to 00, but goes to 100. This increments everytime there is a new/removed feature, and resets everytime `{1}` increments.
  - `{3}` Patch number; an incrementing number, not shown when 0, starting at 0. This increments everytime there is a fix, and resets everytime `{2}` increments.
 
-For example, **1709.4** translates into **Release 9 for 2017, Patch 4**
+For example, **1709.4** translates into **Release 9 for 2017, Patch 4**.
 
 The version also translates into three parts, which is needed for `<VersionPrefix>` in `src/Yio/Yio.csproj`. It's easy enough to not explain, but show in a few examples:
 
@@ -87,6 +87,7 @@ If you are working on an issue, you may choose to work on a separate branch. Thi
 
  - Use `BB-XXX` for *BitBucket*.
  - Use `GH-XXX` for *GitHub*.
+ - Use `VSO-XXX` for *Visual Studio Online*
  - Use `ZIT-XXX` for *Zyrio Git*.
 
 Make sure your git commits also include the issue number in the message, like [ZIT-000] Message goes here. This is also true if you're choosing to work on an issue on any other branch.
