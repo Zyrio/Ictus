@@ -1,8 +1,11 @@
 {
     "AppSettings": {
+        "Analytics": {
+            "GoogleAnalytics": "UA-XXXXXXXX-5"
+        },
         "FileEndpoint": "https://yiff.fs.zyr.io/",
         "FileStorage": "/mnt/smb/Alfa01~Z.V.R.Web/data/yiff.co/",
-        "GoogleAnalytics": "UA-XXXXXXXX-5"
+        "SiteName": "Yio"
     },
     "ConnectionStrings": {
         "DefaultConnection": "..."

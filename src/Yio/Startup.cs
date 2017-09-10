@@ -23,9 +23,10 @@ namespace Yio
         {
             Configuration = configuration;
 
+            AppSettingsConstant.Analytics_GoogleAnalytics = Configuration.GetSection("AppSettings").GetSection("Analytics").GetSection("GoogleAnalytics").Value;
             AppSettingsConstant.FileEndpoint = Configuration.GetSection("AppSettings").GetSection("FileEndpoint").Value;
             AppSettingsConstant.FileStorage = Configuration.GetSection("AppSettings").GetSection("FileStorage").Value;
-            AppSettingsConstant.GoogleAnalytics = Configuration.GetSection("AppSettings").GetSection("GoogleAnalytics").Value;
+            AppSettingsConstant.SiteName = Configuration.GetSection("AppSettings").GetSection("SiteName").Value;
         }
 
         public IConfiguration Configuration { get; }
