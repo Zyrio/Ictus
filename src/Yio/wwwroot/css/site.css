@@ -45,6 +45,7 @@ body {
 #sidebar-logo-container,
 #sidebar-search-container,
 #sidebar-nav-container,
+#sidebar-meta-container,
 #sidebar-tags-container,
 #sidebar-footer-container {
     display: table-row;
@@ -91,19 +92,22 @@ body {
         width: 100%;
     }
 
-#sidebar-nav {
+#sidebar-nav,
+#sidebar-meta {
     border-top: 4px solid #3D3D3D;
     display: table-cell;
     height: 1px;
 }
 
-    #sidebar-nav ul {
+    #sidebar-nav ul,
+    #sidebar-meta ul {
         list-style-type: none;
         margin: 0;
         padding: 0;
     }
 
-        #sidebar-nav ul li {
+        #sidebar-nav ul li,
+        #sidebar-meta ul li {
             font-family: 'Oswald', sans-serif;
             font-size: 18px;
             line-height: 18px;
@@ -113,17 +117,20 @@ body {
             transition: 0.5s;
         }
 
-            #sidebar-nav ul li:hover {
+            #sidebar-nav ul li:hover,
+            #sidebar-meta ul li:hover {
                 background-color: #DDDDDD !important;
                 color: #111111 !important;
             }
 
-            #sidebar-nav ul li.disabled {
+            #sidebar-nav ul li.disabled,
+            #sidebar-meta ul li.disabled {
                 background-color: #111111;
                 opacity: 0.25;
             }
 
-                #sidebar-nav ul li.disabled a {
+                #sidebar-nav ul li.disabled a,
+                #sidebar-meta ul li.disabled a {
                     pointer-events: none;
                 }
 
@@ -142,24 +149,36 @@ body {
                 color: #FFFFFF;
             }
 
-            #sidebar-nav ul li.direct-button-item {
+            #sidebar-nav ul li.upload-button-item {
                 background-color: #222222;
                 color: #FFFFFF;
             }
 
-            #sidebar-nav ul li.upload-button-item {
+            #sidebar-meta ul li.direct-button-item {
                 background-color: #2F2F2F;
                 color: #FFFFFF;
             }
 
-            #sidebar-nav ul li a {
+            #sidebar-meta ul li.comment-button-item {
+                background-color: #222222;
+                color: #FFFFFF;
+            }
+
+            #sidebar-meta ul li.tags-button-item {
+                background-color: #2F2F2F;
+                color: #FFFFFF;
+            }
+
+            #sidebar-nav ul li a,
+            #sidebar-meta ul li a {
                 color: inherit;
                 text-decoration: none;
                 padding: 10px;
                 display: block;
             }
 
-                #sidebar-nav ul li a .fa {
+                #sidebar-nav ul li a .fa,
+                #sidebar-meta ul li a .fa {
                     position: absolute;
                     right: 10px;
                     top: 10px;
@@ -289,6 +308,10 @@ body {
     box-shadow: 0 0 15px #000000;
 }
 
+    .panel.full-height {
+        height: calc(100% - 40px);
+    }
+
 .panel-inner {
     position: relative;
     padding: 20px 20px 10px 20px;
@@ -406,6 +429,10 @@ body {
         width: 100%;
         height: 100%;
     }
+
+        .panel.full-height {
+            height: 100%;
+        }
 }
 
 .upload-tag-selected {
