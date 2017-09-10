@@ -104,6 +104,11 @@ function ClickEvents() {
         TogglePanel("comment");
     });
 
+    $("#error-panel-close").click(function(e) {
+        e.preventDefault(0);
+        TogglePanel("error");
+    });
+
     $("#hfm-button").click(function(e) {
         e.preventDefault();
 
