@@ -28,7 +28,7 @@ namespace Yio.Controllers
         }
 
         [Route("/{repository}")]
-        public IActionResult V2(string repository)
+        public IActionResult Index(string repository)
         {
             return View ("Index");
         }
