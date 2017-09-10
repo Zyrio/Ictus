@@ -402,7 +402,7 @@ function StoreHistory(file) {
         $(".backward-button-item").removeClass("disabled");
     }
 
-    // prunce history if there is 100 items, just so
+    // prune history if there is 100 items, just so
     // we don't clutter up the user's memory
     if(_fileHistory.length === 101) {
         _fileHistory.shift();
