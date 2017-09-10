@@ -28,7 +28,8 @@ Documents for Yiff.co's API V2, at **https://yiff.co/api/v2/...**
 		type: 0,
 		originalFilename: "tumblr_n4o0h1AhMC1swkv68o1_1280.jpg",
 		dateUploaded: "2017-03-01T14:25:56.919056",
-		source: "tumblr"
+		source: "tumblr",
+		hits: 0
 	},
 	tags: [
 		{
@@ -58,6 +59,7 @@ Documents for Yiff.co's API V2, at **https://yiff.co/api/v2/...**
    - `originalFilename` The name of the file in its original form (usually indifferent from `filename`)
    - `dateUploaded` The date the upload completed, in UTC
    - `source` The "source" of the file, or the containing folder the physical file is in
+   - `hits` The amount of times this file has been request
 - `tags` (collection)
 	- `id` The ID unique to a tag->file link
 	- `hits` (currently unused)
@@ -89,7 +91,8 @@ Documents for Yiff.co's API V2, at **https://yiff.co/api/v2/...**
 		type: 0,
 		originalFilename: "tumblr_n4o0h1AhMC1swkv68o1_1280.jpg",
 		dateUploaded: "2017-03-01T14:25:56.919056",
-		source: "tumblr"
+		source: "tumblr",
+		hits: 0
 	},
 	tags: [
 		{
@@ -121,6 +124,7 @@ _This is the same output as **GET:/api/v2/random**_
    - `originalFilename` The name of the file in its original form (usually indifferent from `filename`)
    - `dateUploaded` The date the upload completed, in UTC
    - `source` The "source" of the file, or the containing folder the physical file is in
+   - `hits` The amount of times this file has been request
  - `tags` (collection)
  	- `id` The ID unique to a tag->file link
  	- `hits` (currently unused)

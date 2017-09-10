@@ -11,5 +11,6 @@ namespace Yio.Data.Models
         public string OriginalFilename { get; set; }
         public DateTime DateUploaded { get; set; }
         public string Source { get; set; }
+        public int Hits { get; set; }
     }
 }

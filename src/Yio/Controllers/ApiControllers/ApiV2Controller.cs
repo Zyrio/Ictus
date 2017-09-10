@@ -80,6 +80,8 @@ namespace Yio.Controllers.ApiControllers
                 Tags = tagsForFile
             };
 
+            await _fileRepository.HitFile(file);
+
             return returnItem;
         }
 

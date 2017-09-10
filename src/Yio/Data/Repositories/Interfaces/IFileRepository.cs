@@ -16,5 +16,6 @@ namespace Yio.Data.Repositories.Interfaces
         Task<File> GetFileById(Guid id);
         Task<List<File>> GetFiles();
         Task<File> GetRandomFile();
+        Task HitFile(File file);
     }
 }

@@ -78,6 +78,8 @@ namespace Yio.Controllers.ApiControllers
                         Message = "API V1 will soon be depricated. Please migrate to V2.",
                         Status = 200
                     };
+                    
+                    await _fileRepository.HitFile(file);
 
                     return am;
                 } catch {

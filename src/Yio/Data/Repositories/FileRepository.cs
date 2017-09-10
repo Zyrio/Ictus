@@ -64,5 +64,16 @@ namespace Yio.Data.Repositories
                 .OrderBy(f => Guid.NewGuid()) // NOTE: I have no idea how this works, it just does
                 .FirstOrDefaultAsync();
         }
+
+        public async Task HitFile(File file)
+        {
+            file.Hits = file.Hits + 1;
+            
+            _dbContext
+                .Files
+                .Update(file);
+
+            await _dbContext.SaveChangesAsync();
+        }
     }
 }
