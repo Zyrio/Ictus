@@ -62,8 +62,9 @@ Every release (`{2}`) also triggers a new codename. Currently, there is, has bee
 
  - 1701 'Frisky Fox'
  - 1702 'Kinky Kiwi'
- - 1703 'Dazzling Duck' *(current)*
- - 1704 'Zesty Zebra' *(future)*
+ - 1703 'Dazzling Duck'
+ - 1704 'Zesty Zebra' *(current)*
+ - 1705 'Hung Horse' *(future)*
 
 ### Branches
 
