@@ -74,7 +74,9 @@ namespace Yio.Controllers.ApiControllers
                     GetRandomApiModel am = new GetRandomApiModel
                     {
                         Url = randomFileWithEndpoint,
-                        File = randomFile
+                        File = randomFile,
+                        Message = "API V1 will soon be depricated. Please migrate to V2.",
+                        Status = 200
                     };
 
                     return am;
@@ -126,7 +128,9 @@ namespace Yio.Controllers.ApiControllers
                 Default = "furry",
                 ShowNav = "true",
                 Repos = repos,
-                Endpoint = AppSettingsConstant.FileEndpoint
+                Endpoint = AppSettingsConstant.FileEndpoint,
+                Message = "API V1 will soon be depricated. Please migrate to V2.",
+                Status = 200
             };
 
             return am;
