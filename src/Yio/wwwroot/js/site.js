@@ -227,6 +227,7 @@ function GetFile(fileId) {
             history.pushState(null, null, '/' + currentRepo + '/' + data.id);
 
             StoreHistory('/' + currentRepo + '/' + data.id);
+            TrackVisit(_siteTitle + ": " + data.file.originalFilename, '/' + currentRepo + '/' + data.id);
         },
         error: function (data)
         {
@@ -452,3 +453,12 @@ function ToggleSidebar() {
         $("#view").removeClass("full");
     }
 };
+
+function TrackVisit(pageTitle, pageUrl) {
+    ga('set', {
+        page: pageUrl,
+        title: pageTitle
+    });
+  
+    ga('send', 'pageview');
+}
