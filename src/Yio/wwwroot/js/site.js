@@ -223,9 +223,10 @@ function GetFile(fileId) {
 
             StoreHistory('/' + currentRepo + '/' + data.id);
         },
-        failure: function (data)
+        error: function (data)
         {
-            // handle error
+            SetError("NotFound");
+            TogglePanel("error");
         }
     });
 };
@@ -245,9 +246,10 @@ function GetRandomFile() {
                 GetFile(data.id);
                 PreloadFile(false);
             },
-            failure: function (data)
+            error: function (data)
             {
-                // handle error
+                SetError("Unknown");
+                TogglePanel("error");
             }
         });
     }
@@ -299,9 +301,10 @@ function PreloadFile(keepTrying) {
                 }
             }
         },
-        failure: function (data)
+        error: function (data)
         {
-            // handle error
+            SetError("Unknown");
+            TogglePanel("error");
         }
     });
 }
@@ -321,6 +324,16 @@ function ResizeTagsBox() {
 
     $("#sidebar-tags-inner").css("height", requiredHeight);
 };
+
+function SetError(error) {
+    if(error == "NotFound") {
+        $("#error-title").html("Not Found");
+        $("#error-message").html("This file could not be found. Sorry about that.")
+    } else {
+        $("#error-title").html("Oops");
+        $("#error-message").html("Something has gone wrong. Try again.")
+    }
+}
 
 function SetupSite() {
     $.ajax({
@@ -354,6 +367,11 @@ function SetupSite() {
                 GetFile(currentPath[2]);
                 PreloadFile(true);
             }
+        },
+        error: function (data)
+        {
+            SetError("Unknown");
+            TogglePanel("error");
         }
     })
 }
