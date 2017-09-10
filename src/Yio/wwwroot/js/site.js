@@ -1,11 +1,10 @@
 var _allTags;
-var currentRepo;
-var defaultRepo;
-var endpoint;
-var fileHistory = [];
-var hfmEnabled = false;
-var hfmTimeout;
-var nextFile;
+var _currentRepo;
+var _defaultRepo;
+var _fileHistory = [];
+var _hfmEnabled = false;
+var _hfmTimeout;
+var _nextFile;
 var _siteTitle;
 
 $(document).ready(function() {
@@ -35,19 +34,19 @@ window.onpopstate = function (event) {
     if(currentPath.length === 2) {
         if(currentPath[1]) {
             // URL: /{repository}
-            currentRepo = currentPath[1];
-            $("#repository-selector").val(currentRepo);
+            _currentRepo = currentPath[1];
+            $("#repository-selector").val(_currentRepo);
             GetRandomFile();
         } else {
             // URL: /
-            currentRepo = defaultRepo;
-            $("#repository-selector").val(currentRepo);
+            _currentRepo = _defaultRepo;
+            $("#repository-selector").val(_currentRepo);
             GetRandomFile();
         }
     } else if(currentPath.length === 3) {
         // URL: /{repository}/{fileId}
-        currentRepo = currentPath[1];
-        $("#repository-selector").val(currentRepo);
+        _currentRepo = currentPath[1];
+        $("#repository-selector").val(_currentRepo);
         GetFile(currentPath[2]);
         PreloadFile(true);
     }
@@ -81,13 +80,13 @@ function ClickEvents() {
 
         ToggleHfm();
 
-        fileHistory.pop();
+        _fileHistory.pop();
         
-        var lastItem = fileHistory.pop();
+        var lastItem = _fileHistory.pop();
         var lastPath = lastItem.split('/');
 
         $("#repository-selector").val(lastPath[1]);
-        currentRepo = lastPath[1];
+        _currentRepo = lastPath[1];
         GetFile(lastPath[2]);
         PreloadFile(false);
     });
@@ -112,7 +111,7 @@ function ClickEvents() {
     $("#hfm-button").click(function(e) {
         e.preventDefault();
 
-        if(hfmEnabled) {
+        if(_hfmEnabled) {
             ToggleHfm();
         } else {
             TogglePanel("hfm");
@@ -224,10 +223,10 @@ function GetFile(fileId) {
             $("#view").css("background-image", "url('" + data.location + "')");
 
             document.title = _siteTitle + ": " + data.file.originalFilename;
-            history.pushState(null, null, '/' + currentRepo + '/' + data.id);
+            history.pushState(null, null, '/' + _currentRepo + '/' + data.id);
 
-            StoreHistory('/' + currentRepo + '/' + data.id);
-            TrackVisit(_siteTitle + ": " + data.file.originalFilename, '/' + currentRepo + '/' + data.id);
+            StoreHistory('/' + _currentRepo + '/' + data.id);
+            TrackVisit(_siteTitle + ": " + data.file.originalFilename, '/' + _currentRepo + '/' + data.id);
         },
         error: function (data)
         {
@@ -238,12 +237,12 @@ function GetFile(fileId) {
 };
 
 function GetRandomFile() {
-    if(nextFile) {
-        GetFile(nextFile);
+    if(_nextFile) {
+        GetFile(_nextFile);
         PreloadFile(false);
     } else {
         $.ajax({
-            url: '/api/v2/random/' + currentRepo,
+            url: '/api/v2/random/' + _currentRepo,
             type: 'GET',
             contentType: "application/json; charset=utf-8",
             dataType: 'json',
@@ -276,7 +275,7 @@ function GetTags() {
 
             _allTags = data;
 
-            $("#repository-selector").val(currentRepo);
+            $("#repository-selector").val(_currentRepo);
         }
     });
 }
@@ -288,7 +287,7 @@ function LoadComments() {
 
 function PreloadFile(keepTrying) {
     $.ajax({
-        url: '/api/v2/random/' + currentRepo,
+        url: '/api/v2/random/' + _currentRepo,
         type: 'GET',
         contentType: "application/json; charset=utf-8",
         dataType: 'json',
@@ -298,12 +297,12 @@ function PreloadFile(keepTrying) {
                 data.location.endsWith(".jpg") ||
                 data.location.endsWith(".gif")) {
                     $("#image-preload").attr("src", data.location);
-                    nextFile = data.id;
+                    _nextFile = data.id;
             } else {
                 if(keepTrying) {
                     PreloadFile(true);
                 } else {
-                    nextFile = "";
+                    _nextFile = "";
                 }
             }
         },
@@ -317,8 +316,8 @@ function PreloadFile(keepTrying) {
 
 function RepositorySelectEvent() {
     $("#repository-selector").change(function() {
-        currentRepo = $("#repository-selector").val();
-        nextFile = "";
+        _currentRepo = $("#repository-selector").val();
+        _nextFile = "";
         GetRandomFile();
     });
 }
@@ -350,25 +349,25 @@ function SetupSite() {
         success: function (data)
         {
             _siteTitle = document.title;
-            defaultRepo = data.name;
+            _defaultRepo = data.name;
             
             var currentPath = document.location.pathname.split('/');
 
             if(currentPath.length === 2) {
                 if(currentPath[1]) {
                     // URL: /{repository}
-                    currentRepo = currentPath[1];
+                    _currentRepo = currentPath[1];
                     GetTags();
                     GetRandomFile();
                 } else {
                     // URL: /
-                    currentRepo = defaultRepo;
+                    _currentRepo = _defaultRepo;
                     GetTags();
                     GetRandomFile();
                 }
             } else if(currentPath.length === 3) {
                 // URL: /{repository}/{fileId}
-                currentRepo = currentPath[1];
+                _currentRepo = currentPath[1];
                 GetTags();
                 GetFile(currentPath[2]);
                 PreloadFile(true);
@@ -395,9 +394,9 @@ function SidebarToggleEvent() {
 };
 
 function StoreHistory(file) {
-    fileHistory.push(file);
+    _fileHistory.push(file);
     
-    if(fileHistory.length === 1) {
+    if(_fileHistory.length === 1) {
         $(".backward-button-item").addClass("disabled");
     } else {
         $(".backward-button-item").removeClass("disabled");
@@ -405,28 +404,28 @@ function StoreHistory(file) {
 
     // prunce history if there is 100 items, just so
     // we don't clutter up the user's memory
-    if(fileHistory.length === 101) {
-        fileHistory.shift();
+    if(_fileHistory.length === 101) {
+        _fileHistory.shift();
     }
 };
 
 function ToggleHfm(interval) {
     if(interval) {
-        if(hfmEnabled) {
+        if(_hfmEnabled) {
             $("#hfm-button .fa").css("color", "inherit");
-            hfmEnabled = false;
-            clearInterval(hfmTimeout);
+            _hfmEnabled = false;
+            clearInterval(_hfmTimeout);
         } else {
             $("#hfm-button .fa").css("color", "red");
-            hfmEnabled = true;
-            hfmTimeout = setInterval(function() {
+            _hfmEnabled = true;
+            _hfmTimeout = setInterval(function() {
                 GetRandomFile();
             }, interval*1000);
         }
     } else {
         $("#hfm-button .fa").css("color", "inherit");
-        hfmEnabled = false;
-        clearInterval(hfmTimeout);
+        _hfmEnabled = false;
+        clearInterval(_hfmTimeout);
     }
 } 
 
