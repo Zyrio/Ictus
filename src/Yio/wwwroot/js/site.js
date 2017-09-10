@@ -302,6 +302,10 @@ function SetupSite(loadFile) {
                     }
                 }
             });
+        },
+        failure: function (data)
+        {
+            TogglePanel("error");
         }
     });
 }
