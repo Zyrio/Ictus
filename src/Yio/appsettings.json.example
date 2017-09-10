@@ -1,6 +1,7 @@
 {
     "AppSettings": {
-        "Analytics": {
+        "External": {
+            "DISQUS": "XXX",
             "GoogleAnalytics": "UA-XXXXXXXX-5"
         },
         "FileEndpoint": "https://yiff.fs.zyr.io/",
