@@ -1,0 +1,42 @@
+<html>
+<head>
+    <title>Comments</title>
+</head>
+<body>
+<div id="disqus_thread"></div>
+    <script>
+        var pageUrl;
+        var fileId = document.location.pathname.split('/')[2];
+
+        document.title = fileId;
+
+        if(!document.location.port) {
+            pageUrl = document.location.protocol + "//" + document.location.hostname + document.location.pathname;
+        } else {
+            pageUrl = document.location.protocol + "//" + document.location.hostname + ":" + document.location.port  + document.location.pathname;
+        }
+
+        console.log(pageUrl);
+
+        if(!window.frameElement) {
+            if(!document.location.port) {
+                window.location = document.location.protocol + "//" + document.location.hostname + "/#/" + fileId;
+            } else {
+                window.location = document.location.protocol + "//" + document.location.hostname + ":" + document.location.port + "/#/" + fileId;
+            }
+        }
+
+        var disqus_config = function () {
+            this.page.url = pageUrl;
+            this.page.identifier = fileId;
+        };
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+            s.src = 'https://yiff.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</body>
+</html>

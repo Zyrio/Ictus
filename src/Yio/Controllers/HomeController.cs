@@ -24,13 +24,19 @@ namespace Yio.Controllers
                     Yio.Data.Constants.VersionConstant.Patch.ToString();
             }
 
-            return View ("Index");
+            return View("Index");
         }
 
         [Route("/{repository}")]
         public IActionResult Index(string repository)
         {
-            return View ("Index");
+            return View("Index");
+        }
+
+        [Route("/comment/{file}")]
+        public IActionResult Comment(string file)
+        {
+            return View("Comment");
         }
 
         public string Error()

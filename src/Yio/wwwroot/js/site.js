@@ -67,6 +67,17 @@ function ClickEvents() {
         window.location.hash = "/" + lastItem;
     });
 
+    $("#comment-button").click(function(e) {
+        e.preventDefault(0);
+        LoadComments();
+        TogglePanel("comment");
+    });
+
+    $("#comment-panel-close").click(function(e) {
+        e.preventDefault(0);
+        TogglePanel("comment");
+    });
+
     $("#hfm-button").click(function(e) {
         e.preventDefault();
 
@@ -213,6 +224,11 @@ function GetRandomFile() {
             // handle error
         }
     });
+}
+
+function LoadComments() {
+    var currentFile = window.location.hash.substring(2);
+    $("#comment-frame").attr("src", "/comment/" + currentFile);
 }
 
 function PreloadFile(keepTrying) {
