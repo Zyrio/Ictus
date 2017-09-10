@@ -100,7 +100,9 @@
         @Html.Partial("_ErrorPanelPartial")
         @Html.Partial("_HfmPanelPartial")
         @Html.Partial("_UploadPanelPartial")
-        @Html.Partial("_WelcomePanelPartial")
+        @if(ViewBag.IsOfficial) {
+            @Html.Partial("_WelcomePanelPartial")
+        }
     </div>
 
     <img id="image-preload" style="width: 0; height: 0;" />
