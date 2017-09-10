@@ -16,8 +16,6 @@
             pageUrl = document.location.protocol + "//" + document.location.hostname + ":" + document.location.port  + document.location.pathname;
         }
 
-        console.log(pageUrl);
-
         if(!window.frameElement) {
             if(!document.location.port) {
                 window.location = document.location.protocol + "//" + document.location.hostname + "/#/" + fileId;
