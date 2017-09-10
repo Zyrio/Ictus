@@ -47,7 +47,7 @@ Yio's versioning is split up into two parts (although, technically three):
 
  - `{1}` Short-hand year (e.g. 2017 becomes 17)
  - `{2}` Release number; an incrementing number, with one leading zero, starting at 1 (e.g. 1 becomes 01). Passing 99 does not reset it back to 00, but goes to 100. This increments everytime there is a new/removed feature, and resets everytime `{1}` increments.
- - `{3}` Patch number; an incrementing number, not shown when 0, starting at 0. This increments everytime there is a fix, minor change, and resets everytime `{2}` increments.
+ - `{3}` Patch number; an incrementing number, not shown when 0, starting at 0. This increments everytime there is a fix, under-the-hood change, or visible minor change, and resets everytime `{2}` increments.
 
 For example, **1709.4** translates into **Release 9 for 2017, Patch 4**.
 
