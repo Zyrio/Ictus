@@ -1,3 +1,4 @@
+var _allTags;
 var currentRepo;
 var defaultRepo;
 var endpoint;
@@ -5,6 +6,7 @@ var fileHistory = [];
 var hfmEnabled = false;
 var hfmTimeout;
 var nextFile;
+var _siteTitle;
 
 $(document).ready(function() {
     var hash = window.location.hash.substring(2);
@@ -20,20 +22,36 @@ $(document).ready(function() {
 
     ResizeTagsBox();
 
-    if(hash === "") {
-        SetupSite(true);
-    } else {
-        SetupSite(false);
-    };
+    SetupSite();
 });
 
 window.addEventListener('resize', function(event){
     ResizeTagsBox();
 });
 
-window.addEventListener("hashchange", function(event) {
-    GetFile();
-});
+window.onpopstate = function (event) {
+    var currentPath = document.location.pathname.split('/');
+
+    if(currentPath.length === 2) {
+        if(currentPath[1]) {
+            // URL: /{repository}
+            currentRepo = currentPath[1];
+            $("#repository-selector").val(currentRepo);
+            GetRandomFile();
+        } else {
+            // URL: /
+            currentRepo = defaultRepo;
+            $("#repository-selector").val(currentRepo);
+            GetRandomFile();
+        }
+    } else if(currentPath.length === 3) {
+        // URL: /{repository}/{fileId}
+        currentRepo = currentPath[1];
+        $("#repository-selector").val(currentRepo);
+        GetFile(currentPath[2]);
+        PreloadFile(true);
+    }
+}
 
 function ClickEvents() {
     $("#about-button").click(function(e) {
@@ -64,9 +82,14 @@ function ClickEvents() {
         ToggleHfm();
 
         fileHistory.pop();
-        var lastItem = fileHistory.pop();
         
-        window.location.hash = "/" + lastItem;
+        var lastItem = fileHistory.pop();
+        var lastPath = lastItem.split('/');
+
+        $("#repository-selector").val(lastPath[1]);
+        currentRepo = lastPath[1];
+        GetFile(lastPath[2]);
+        PreloadFile(false);
     });
 
     $("#comment-button").click(function(e) {
@@ -184,11 +207,9 @@ function Upload_UploadFile() {
     });
 }
 
-function GetFile() {
-    var currentFile = window.location.hash.substring(2);
-
+function GetFile(fileId) {
     $.ajax({
-        url: '/api/v2/files/' + currentFile,
+        url: '/api/v2/files/' + fileId,
         type: 'GET',
         contentType: "application/json; charset=utf-8",
         dataType: 'json',
@@ -197,7 +218,10 @@ function GetFile() {
             $("#direct-button").attr("href", data.location);
             $("#view").css("background-image", "url('" + data.location + "')");
 
-            StoreHistory(currentFile);
+            document.title = _siteTitle + ": " + data.file.originalFilename;
+            history.pushState(null, null, '/' + currentRepo + '/' + data.id);
+
+            StoreHistory('/' + currentRepo + '/' + data.id);
         },
         failure: function (data)
         {
@@ -207,36 +231,56 @@ function GetFile() {
 };
 
 function GetRandomFile() {
+    if(nextFile) {
+        GetFile(nextFile);
+        PreloadFile(false);
+    } else {
+        $.ajax({
+            url: '/api/v2/random/' + currentRepo,
+            type: 'GET',
+            contentType: "application/json; charset=utf-8",
+            dataType: 'json',
+            success: function (data)
+            {
+                GetFile(data.id);
+                PreloadFile(false);
+            },
+            failure: function (data)
+            {
+                // handle error
+            }
+        });
+    }
+}
+
+function GetTags() {
     $.ajax({
-        url: '/api/v2/random/' + currentRepo.toLowerCase(),
+        url: '/api/v2/tags',
         type: 'GET',
         contentType: "application/json; charset=utf-8",
         dataType: 'json',
         success: function (data)
         {
-            if(nextFile) {
-                window.location.hash = "/" + nextFile;
-                PreloadFile(false);
-            } else {
-                window.location.hash = "/" + data.id;
-                PreloadFile(false);
-            }
-        },
-        failure: function (data)
-        {
-            // handle error
+            $.each(data, function(index) {
+                $("#repository-selector").append("<option value='" + data[index].name + "'>" + data[index].name + " (" + data[index].fileCount + ")" + "</option>");
+                $("#upload-tag-selector").append("<option value='" + data[index].name + "'>" + data[index].name + " (" + data[index].fileCount + ")" + "</option>");
+            });
+
+            _allTags = data;
+
+            $("#repository-selector").val(currentRepo);
         }
     });
 }
 
 function LoadComments() {
-    var currentFile = window.location.hash.substring(2);
-    $("#comment-frame").attr("src", "/comment/" + currentFile);
+    var currentPath = document.location.pathname.split('/');
+    $("#comment-frame").attr("src", "/frame/comment/" + currentPath[1] + '/' + currentPath[2]);
 }
 
 function PreloadFile(keepTrying) {
     $.ajax({
-        url: '/api/v2/random/' + currentRepo.toLowerCase(),
+        url: '/api/v2/random/' + currentRepo,
         type: 'GET',
         contentType: "application/json; charset=utf-8",
         dataType: 'json',
@@ -265,7 +309,7 @@ function PreloadFile(keepTrying) {
 function RepositorySelectEvent() {
     $("#repository-selector").change(function() {
         currentRepo = $("#repository-selector").val();
-        PreloadFile();
+        nextFile = "";
         GetRandomFile();
     });
 }
@@ -278,7 +322,7 @@ function ResizeTagsBox() {
     $("#sidebar-tags-inner").css("height", requiredHeight);
 };
 
-function SetupSite(loadFile) {
+function SetupSite() {
     $.ajax({
         url: '/api/v2/tags/default',
         type: 'GET',
@@ -286,47 +330,32 @@ function SetupSite(loadFile) {
         dataType: 'json',
         success: function (data)
         {
-            if(window.location.pathname === "/") {
-                currentRepo = data.name;
-            } else {
-                currentRepo = window.location.pathname.slice(1);
-                if(window.location.hash) {
-                    history.pushState(null, null, '/' + window.location.hash);
-                } else {
-                    history.pushState(null, null, '/');
-                }
-            }
-
+            _siteTitle = document.title;
             defaultRepo = data.name;
+            
+            var currentPath = document.location.pathname.split('/');
 
-            $.ajax({
-                url: '/api/v2/tags',
-                type: 'GET',
-                contentType: "application/json; charset=utf-8",
-                dataType: 'json',
-                success: function (dataTags)
-                {
-                    $.each(dataTags, function(index) {
-                        $("#repository-selector").append("<option value='" + dataTags[index].name + "'>" + dataTags[index].name + " (" + dataTags[index].fileCount + ")" + "</option>");
-                        $("#upload-tag-selector").append("<option value='" + dataTags[index].name + "'>" + dataTags[index].name + " (" + dataTags[index].fileCount + ")" + "</option>");
-                    });
-        
-                    $("#repository-selector").val(currentRepo.toLowerCase());
-        
-                    if(loadFile) {
-                        GetRandomFile();
-                    } else {
-                        GetFile();
-                        PreloadFile(true);
-                    }
+            if(currentPath.length === 2) {
+                if(currentPath[1]) {
+                    // URL: /{repository}
+                    currentRepo = currentPath[1];
+                    GetTags();
+                    GetRandomFile();
+                } else {
+                    // URL: /
+                    currentRepo = defaultRepo;
+                    GetTags();
+                    GetRandomFile();
                 }
-            });
-        },
-        failure: function (data)
-        {
-            TogglePanel("error");
+            } else if(currentPath.length === 3) {
+                // URL: /{repository}/{fileId}
+                currentRepo = currentPath[1];
+                GetTags();
+                GetFile(currentPath[2]);
+                PreloadFile(true);
+            }
         }
-    });
+    })
 }
 
 function SidebarToggleEvent() {

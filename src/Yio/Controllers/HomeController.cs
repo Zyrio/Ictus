@@ -8,7 +8,10 @@ namespace Yio.Controllers
         {
         }
 
-        public IActionResult Index()
+        [Route("/")]
+        [Route("/{repository}")]
+        [Route("/{repository}/{fileId}")]
+        public IActionResult Index(string repository, string fileId)
         {
             ViewBag.SiteName = Yio.Data.Constants.AppSettingsConstant.SiteName;
             ViewBag.IsOfficial = true;
@@ -27,14 +30,8 @@ namespace Yio.Controllers
             return View("Index");
         }
 
-        [Route("/{repository}")]
-        public IActionResult Index(string repository)
-        {
-            return View("Index");
-        }
-
-        [Route("/comment/{file}")]
-        public IActionResult Comment(string file)
+        [Route("/frame/comment/{repository}/{fileId}")]
+        public IActionResult Comment(string repository, string fileId)
         {
             return View("Comment");
         }

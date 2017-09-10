@@ -6,7 +6,9 @@
 <div id="disqus_thread"></div>
     <script>
         var pageUrl;
-        var fileId = document.location.pathname.split('/')[2];
+        var currentPath = document.location.pathname.split('/');
+        var repository = currentPath[3]
+        var fileId = currentPath[4];
 
         document.title = fileId;
 
@@ -18,9 +20,9 @@
 
         if(!window.frameElement) {
             if(!document.location.port) {
-                window.location = document.location.protocol + "//" + document.location.hostname + "/#/" + fileId;
+                window.location = document.location.protocol + "//" + document.location.hostname + "/" + repository + '/' + fileId;
             } else {
-                window.location = document.location.protocol + "//" + document.location.hostname + ":" + document.location.port + "/#/" + fileId;
+                window.location = document.location.protocol + "//" + document.location.hostname + ":" + document.location.port + '/' + repository + '/' + fileId;
             }
         }
 
