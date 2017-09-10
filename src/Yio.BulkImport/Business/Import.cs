@@ -82,16 +82,19 @@ namespace Yio.BulkImport.Business
                         var to = ArgConstants.MoveTo + source + "/" + name;
                         try {
                             System.IO.File.Move(from, to);
+
+                            _dbContext.SaveChanges();
+                            Console.WriteLine(newFile.Id + ":" + name + ":" + tag + "/" + source);
                         } catch(System.IO.DirectoryNotFoundException) {
                             Directory.CreateDirectory(ArgConstants.MoveTo + source);
+
                             System.IO.File.Move(from, to);
+
+                            _dbContext.SaveChanges();
+                            Console.WriteLine(newFile.Id + ":" + name + ":" + tag + "/" + source);
+                        } catch(System.IO.IOException) {
+                            System.IO.File.Delete(from);
                         }
-
-                        // save db
-                        _dbContext.SaveChanges();
-
-                        // log to console
-                        Console.WriteLine(newFile.Id + ":" + name + ":" + tag + "/" + source);
                     }
                 }
             }
