@@ -38,6 +38,7 @@ window.addEventListener("hashchange", function(event) {
 function ClickEvents() {
     $("#about-button").click(function(e) {
         e.preventDefault();
+        ToggleHfm();
         TogglePanel("about");
     });
 
@@ -48,6 +49,7 @@ function ClickEvents() {
 
     $("#apps-button").click(function(e) {
         e.preventDefault(0);
+        ToggleHfm();
         TogglePanel("apps");
     });
 
@@ -69,6 +71,7 @@ function ClickEvents() {
 
     $("#comment-button").click(function(e) {
         e.preventDefault(0);
+        ToggleHfm();
         LoadComments();
         TogglePanel("comment");
     });
