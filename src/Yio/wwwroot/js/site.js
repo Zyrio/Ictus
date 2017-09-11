@@ -16,6 +16,7 @@ $(document).ready(function() {
     }
 
     ClickEvents();
+    FullscreenEvent();
     RepositorySelectEvent();
     SidebarToggleEvent();
 
@@ -27,36 +28,6 @@ $(document).ready(function() {
 window.addEventListener('resize', function(event){
     ResizeTagsBox();
 });
-
-window.addEventListener("keydown", function (event) {
-    if (event.defaultPrevented) {
-      return; // Do nothing if the event was already processed
-    }
-  
-    switch (event.key) {
-      case "r":
-      case "ArrowRight":
-      case "Space":
-        ToggleHfm();
-        GetRandomFile();
-        break;
-      case "d":
-      case "ArrowDown":
-        $("#direct-button").get(0).click();
-        break;
-      case "p":
-      case "ArrowLeft":
-        if(!$("#backward-button").parent().hasClass("disabled")) {
-            $("#backward-button").get(0).click();
-        }
-        break;
-      default:
-        return; // Quit when this doesn't handle the key event.
-    }
-  
-    // Cancel the default action to avoid it being handled twice
-    event.preventDefault();
-  }, true);
 
 window.onpopstate = function (event) {
     var currentPath = document.location.pathname.split('/');
@@ -193,6 +164,57 @@ function ClickEvents() {
     $("#upload-tag-add").click(function() {
         Upload_AddTag();
     });
+}
+
+function FullscreenEvent() {
+    window.addEventListener("keydown", function (event) {
+        if (event.defaultPrevented) {
+          return; // Do nothing if the event was already processed
+        }
+      
+        switch (event.key) {
+            case "d":
+            case "ArrowRight":
+                ToggleHfm();
+                GetRandomFile();
+                break;
+            case "s":
+            case "ArrowDown":
+                $("#direct-button").get(0).click();
+                break;
+            case "a":
+            case "ArrowLeft":
+                if(!$("#backward-button").parent().hasClass("disabled")) {
+                    $("#backward-button").get(0).click();
+                }
+                break;
+            case "w":
+            case "ArrowUp":
+                    var i = document.getElementsByTagName("html")[0];
+                    
+                    if (i.requestFullscreen) {
+                        i.requestFullscreen();
+                    } else if (i.webkitRequestFullscreen) {
+                        i.webkitRequestFullscreen();
+                    } else if (i.mozRequestFullScreen) {
+                        i.mozRequestFullScreen();
+                    } else if (i.msRequestFullscreen) {
+                        i.msRequestFullscreen();
+                    }
+                    
+                    if($("#sidebar").hasClass("visible")) {
+                        $("#sidebar-mini").removeClass("hidden");
+                        $("#sidebar").removeClass("visible");
+                        $("#view").addClass("full");
+                    }
+                break;
+          default:
+            return; // Quit when this doesn't handle the key event.
+        }
+      
+        // Cancel the default action to avoid it being handled twice
+        event.preventDefault();
+    }, true);
 }
 
 function Upload_AddTag() {
