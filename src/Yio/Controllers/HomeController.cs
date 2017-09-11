@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Yio.Controllers
@@ -28,6 +29,26 @@ namespace Yio.Controllers
             }
 
             return View("Index");
+        }
+
+        [Route("/{repository}/{fileId}.{extension}")]
+        public async Task<IActionResult> Raw(string repository, string fileId, string extension)
+        {
+            var file = System.IO.File.OpenRead("/home/ducky/Pictures/607.jpg");
+            string type = "application/octet-stream";
+
+            if(extension == "jpg" || extension == "jpeg")
+            {
+               type =  "image/jpeg";
+            } else if(extension == "png")
+            {
+                type = "image/jpeg";
+            } else if(extension == "gif")
+            {
+                type = "image/gif";
+            }
+
+            return File(file, type);
         }
 
         [Route("/frame/comment/{repository}/{fileId}")]
