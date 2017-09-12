@@ -94,6 +94,6 @@ If you are working on an issue, you may choose to work on a separate branch. Thi
  - Use `VSO-XXX` for *Visual Studio Online*
  - Use `ZIT-XXX` for *Zyrio Git*.
 
-Make sure your git commits also include the issue number in the message, like [ZIT-000] Message goes here. This is also true if you're choosing to work on an issue on any other branch.
+Make sure your git commits also include the issue number in the message, like `[ZIT-000] Message goes here`. This is also true if you're choosing to work on an issue on any other branch.
 
 After work is done, this branch should be merged into `develop`, and then closed when necessary.
