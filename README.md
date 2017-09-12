@@ -79,8 +79,6 @@ The `master` branch is for production code, which only should ever be merged to 
 
 Before merging to `master`, make sure to update the version in `src/Ictus/Data/Constants/VersionConstant.cs` and `src/Ictus/Ictus.csproj`. See the "Versioning" paragraph for more details.
 
-The server(s) https://yiff.co runs on pulls from `master` everytime the branch is pushed too, allowing the site to stay up-to-date quickly with the repository.
-
 Commits must also be tagged for new versions, prefixed with a short version of the codename; for example, **1703 'Dazzling Duck'** becomes `duck/1703`
 
 #### develop
