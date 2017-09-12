@@ -6,7 +6,7 @@
         },
         "FileEndpoint": "https://files.example.com/",
         "FileStorage": "/var/lib/ictus/",
-        "SiteDescription": "<p>My site is so cool!</p>"
+        "SiteDescription": "<p>Ictus is an imageboard, built for the modern web.</p>"
         "SiteIcon": "camera-retro",
         "SiteName": "Ictus"
     },
