@@ -4,9 +4,10 @@
             "DISQUS": "XXX",
             "GoogleAnalytics": "UA-XXXXXXXX-5"
         },
-        "FileEndpoint": "https://yiff.fs.zyr.io/",
-        "FileStorage": "/mnt/smb/Alfa01~Z.V.R.Web/data/yiff.co/",
-        "SiteName": "Yio"
+        "FileEndpoint": "https://files.example.com/",
+        "FileStorage": "/var/lib/ictus/",
+        "SiteIcon": "camera-retro",
+        "SiteName": "Ictus"
     },
     "ConnectionStrings": {
         "DefaultConnection": "..."
