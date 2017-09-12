@@ -20,13 +20,13 @@ $(document).ready(function() {
     RepositorySelectEvent();
     SidebarToggleEvent();
 
-    ResizeTagsBox();
+    ResizeNavBox();
 
     SetupSite();
 });
 
 window.addEventListener('resize', function(event){
-    ResizeTagsBox();
+    ResizeNavBox();
 });
 
 window.onpopstate = function (event) {
@@ -374,12 +374,12 @@ function RepositorySelectEvent() {
     });
 }
 
-function ResizeTagsBox() {
-    $("#sidebar-tags-inner").css("height", "0");
+function ResizeNavBox() {
+    $("#sidebar-nav-inner").css("height", "0");
 
-    var requiredHeight = $("#sidebar-tags").height() + "px";
+    var requiredHeight = $("#sidebar-nav").height() + "px";
 
-    $("#sidebar-tags-inner").css("height", requiredHeight);
+    $("#sidebar-nav-inner").css("height", requiredHeight);
 };
 
 function SetError(error) {
@@ -492,7 +492,7 @@ function TogglePanel(name) {
 }
 
 function ToggleSidebar() {
-    ResizeTagsBox();
+    ResizeNavBox();
 
     if($("#sidebar").hasClass("visible")) {
         $("#sidebar-mini").removeClass("hidden");

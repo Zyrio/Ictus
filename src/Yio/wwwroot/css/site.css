@@ -44,9 +44,8 @@ body {
 
 #sidebar-logo-container,
 #sidebar-search-container,
+#sidebar-random-container,
 #sidebar-nav-container,
-#sidebar-meta-container,
-#sidebar-tags-container,
 #sidebar-footer-container {
     display: table-row;
 }
@@ -92,22 +91,21 @@ body {
         width: 100%;
     }
 
-#sidebar-nav,
-#sidebar-meta {
+#sidebar-random,
+#sidebar-nav {
     border-top: 4px solid #3D3D3D;
     display: table-cell;
-    height: 1px;
 }
 
-    #sidebar-nav ul,
-    #sidebar-meta ul {
+    #sidebar-random ul,
+    #sidebar-nav ul {
         list-style-type: none;
         margin: 0;
         padding: 0;
     }
 
-        #sidebar-nav ul li,
-        #sidebar-meta ul li {
+        #sidebar-random ul li,
+        #sidebar-nav ul li {
             font-family: 'Oswald', sans-serif;
             font-size: 18px;
             line-height: 18px;
@@ -117,27 +115,22 @@ body {
             transition: 0.5s;
         }
 
-            #sidebar-nav ul li:hover,
-            #sidebar-meta ul li:hover {
+            #sidebar-random ul li:hover,
+            #sidebar-nav ul li:hover {
                 background-color: #DDDDDD !important;
                 color: #111111 !important;
             }
 
-            #sidebar-nav ul li.disabled,
-            #sidebar-meta ul li.disabled {
+            #sidebar-random ul li.disabled,
+            #sidebar-nav ul li.disabled {
                 background-color: #111111;
                 opacity: 0.25;
             }
 
-                #sidebar-nav ul li.disabled a,
-                #sidebar-meta ul li.disabled a {
+                #sidebar-random ul li.disabled a,
+                #sidebar-nav ul li.disabled a {
                     pointer-events: none;
                 }
-
-            #sidebar-nav ul li.random-button-item {
-                background-color: #FF337A;
-                color: #000000;
-            }
 
             #sidebar-nav ul li.history-button-item {
                 background-color: #222222;
@@ -154,46 +147,50 @@ body {
                 color: #FFFFFF;
             }
 
-            #sidebar-meta ul li.direct-button-item {
+            #sidebar-nav ul li.direct-button-item {
                 background-color: #2F2F2F;
                 color: #FFFFFF;
+                border-top: 4px solid #3D3D3D;
             }
 
-            #sidebar-meta ul li.comment-button-item {
+            #sidebar-nav ul li.comment-button-item {
                 background-color: #222222;
                 color: #FFFFFF;
             }
 
-            #sidebar-meta ul li.tags-button-item {
+            #sidebar-nav ul li.tags-button-item {
                 background-color: #2F2F2F;
                 color: #FFFFFF;
             }
 
-            #sidebar-nav ul li a,
-            #sidebar-meta ul li a {
+            #sidebar-random ul li a,
+            #sidebar-nav ul li a {
                 color: inherit;
                 text-decoration: none;
                 padding: 10px;
                 display: block;
             }
 
-                #sidebar-nav ul li a .fa,
-                #sidebar-meta ul li a .fa {
+                #sidebar-random ul li a .fa,
+                #sidebar-nav ul li a .fa {
                     position: absolute;
                     right: 10px;
                     top: 10px;
                 }
 
-#sidebar-tags {
-    display: table-cell;
-    border-top: 4px solid #3D3D3D;
-}
-
-#sidebar-tags-inner {
-    visibility: hidden;
-    overflow-y: scroll;
+#sidebar-nav-inner {
+    overflow-y: auto;
     height: 1px;
 }
+
+#sidebar-random {
+    height: 1px;
+}
+
+    #sidebar-random ul li.random-button-item {
+        background-color: #FF337A;
+        color: #000000;
+    }
 
 #sidebar-footer {
     display: table-cell;
