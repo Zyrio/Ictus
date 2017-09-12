@@ -30,6 +30,10 @@ namespace Ictus.Controllers
                     Ictus.Data.Constants.VersionConstant.Patch.ToString();
             }
 
+            if(Ictus.Data.Constants.VersionConstant.Unstable) {
+                ViewBag.Version += "-dev";
+            }
+
             return View("Index");
         }
 
