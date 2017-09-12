@@ -27,6 +27,7 @@ namespace Yio
             AppSettingsConstant.External_GoogleAnalytics = Configuration.GetSection("AppSettings").GetSection("External").GetSection("GoogleAnalytics").Value;
             AppSettingsConstant.FileEndpoint = Configuration.GetSection("AppSettings").GetSection("FileEndpoint").Value;
             AppSettingsConstant.FileStorage = Configuration.GetSection("AppSettings").GetSection("FileStorage").Value;
+            AppSettingsConstant.SiteDescription = Configuration.GetSection("AppSettings").GetSection("SiteDescription").Value;
             AppSettingsConstant.SiteIcon = Configuration.GetSection("AppSettings").GetSection("SiteIcon").Value;
             AppSettingsConstant.SiteName = Configuration.GetSection("AppSettings").GetSection("SiteName").Value;
         }

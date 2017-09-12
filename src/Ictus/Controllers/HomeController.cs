@@ -14,6 +14,7 @@ namespace Yio.Controllers
         [Route("/{repository}/{fileId}")]
         public IActionResult Index(string repository, string fileId)
         {
+            ViewBag.SiteDescription = Yio.Data.Constants.AppSettingsConstant.SiteDescription;
             ViewBag.SiteIcon = "fa-" + Yio.Data.Constants.AppSettingsConstant.SiteIcon;
             ViewBag.SiteName = Yio.Data.Constants.AppSettingsConstant.SiteName;
             ViewBag.IsYiffco = true;
