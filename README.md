@@ -1,7 +1,9 @@
-Yio
-===
+Ictus
+=====
 
-The code behind [Yiff.co](https://nsfw.ducky.ws?url=https://yiff.co).
+![Screenshot of Yiff.co](https://zyr.io/assets/img/posts/yiffco-004.png)
+
+The code behind [Yiff.co](https://nsfw.ducky.ws?url=https://yiff.co), now open to all!
 
 ## Development
 
@@ -19,12 +21,12 @@ This assumes you have already pulled the repository and are in the root director
 Restore needed packages...
 
 ```
-$ cd src/Yio/
+$ cd src/Ictus
 $ dotnet restore # Restore NuGet packages
 $ cd ../..
 ```
 
-Copy `src/Yio/appsettings.json.example` to `src/Yio/appsettings.json` and configure accordingly. If you do not have any files locally, you can get away with just setting `FileEndpoint` to `https://yiff.fs.zyr.io/`, however, uploading will not work.
+Copy `src/Ictus/appsettings.json.example` to `src/Ictus/appsettings.json` and configure accordingly.
 
 Set build envronment...
 
@@ -35,7 +37,7 @@ export ASPNETCORE_ENVIRONMENT="Development"
 Run Webapp project to start the web server...
 
 ```
-$ cd src/Yio/
+$ cd src/Ictus/
 $ dotnet run
 ```
 
@@ -51,7 +53,7 @@ Yio's versioning is split up into two parts (although, technically three):
 
 For example, **1709.4** translates into **Release 9 for 2017, Patch 4**.
 
-The version also translates into three parts, which is needed for `<VersionPrefix>` in `src/Yio/Yio.csproj`. It's easy enough to not explain, but show in a few examples:
+The version also translates into three parts, which is needed for `<VersionPrefix>` in `src/Ictus/Ictus.csproj`. It's easy enough to not explain, but show in a few examples:
 
  - `17.7.0` is `1707`
  - `18.13.5` is `1813.5`
@@ -75,7 +77,7 @@ Every release (`{2}`) also triggers a new codename. Currently, there is, has bee
 
 The `master` branch is for production code, which only should ever be merged to when the version increments.
 
-Before merging to `master`, make sure to update the version in `src/Yio/Data/Constants/VersionConstant.cs` and `src/Yio/Yio.csproj`. See the "Versioning" paragraph for more details.
+Before merging to `master`, make sure to update the version in `src/Ictus/Data/Constants/VersionConstant.cs` and `src/Ictus/Ictus.csproj`. See the "Versioning" paragraph for more details.
 
 The server(s) https://yiff.co runs on pulls from `master` everytime the branch is pushed too, allowing the site to stay up-to-date quickly with the repository.
 

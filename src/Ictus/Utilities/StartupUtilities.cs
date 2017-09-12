@@ -56,15 +56,16 @@ namespace Yio.Utilities
             Console.OutputEncoding = System.Text.Encoding.Unicode;
 
             Console.ForegroundColor = LogoColor;
-            Console.WriteLine(@"__   ___       ");
-            Console.WriteLine(@"\ \ / (_) ___  ");
-            Console.WriteLine(@" \ V /| |/ _ \ ");
-            Console.WriteLine(@"  | | | | (_) |");
-            Console.WriteLine(@"  |_| |_|\___/ " + Environment.NewLine);
+            
+            Console.WriteLine(@" ___     _ ");
+            Console.WriteLine(@"|_ _|___| |_ _   _ ___ ");
+            Console.WriteLine(@" | |/ __| __| | | / __|");
+            Console.WriteLine(@" | | (__| |_| |_| \__ \");
+            Console.WriteLine(@"|___\___|\__|\__,_|___/" + Environment.NewLine);
             Console.ResetColor();
 
             Console.ForegroundColor = ConsoleColor.DarkGray;
-            Console.WriteLine("---------------" + Environment.NewLine);
+            Console.WriteLine("-----------------------" + Environment.NewLine);
             Console.ResetColor();
 
             Console.WriteLine("Release " + Release + Environment.NewLine);
