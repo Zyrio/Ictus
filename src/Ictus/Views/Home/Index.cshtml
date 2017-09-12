@@ -62,16 +62,11 @@
                 <div id="sidebar-footer-container">
                     <div id="sidebar-footer">
                         <ul>
-                            @if(ViewBag.IsOfficial) {
+                            @if(ViewBag.IsYiffco) {
                                 <li><a href="#" id="apps-button"><i class="fa fa-fw fa-rocket"></i> Apps &amp; Bots</a></li>
-                                <li><a href="#" id="about-button"><i class="fa fa-fw fa-info-circle"></i> About / Contact</a></li>
                             }
-                            <environment names="Development">
-                                <li><i class="fa fa-fw fa-flash"></i> <strong>Yio</strong> @ViewBag.Version-dev</li>
-                            </environment>
-                            <environment names="Staging,Production">
-                                <li><i class="fa fa-fw fa-flash"></i> <strong>@ViewBag.SiteName</strong> @ViewBag.Version</li>
-                            </environment>
+                            <li><a href="#" id="about-button"><i class="fa fa-fw fa-info-circle"></i> About / Contact</a></li>
+                            <li><i class="fa fa-fw fa-flash"></i> <strong>Ictus</strong> @ViewBag.Version-dev</li>
                         </ul>
                     </div>
                 </div>
@@ -89,17 +84,15 @@
     </div>
 
     <div id="panel-overlay">
-        @if(ViewBag.IsOfficial) {
-            @Html.Partial("_AboutPanelPartial")
+        @Html.Partial("_AboutPanelPartial")
+        @if(ViewBag.IsYiffco) {
             @Html.Partial("_AppsPanelPartial")
         }
         @Html.Partial("_CommentPanelPartial")
         @Html.Partial("_ErrorPanelPartial")
         @Html.Partial("_HfmPanelPartial")
         @Html.Partial("_UploadPanelPartial")
-        @if(ViewBag.IsOfficial) {
-            @Html.Partial("_WelcomePanelPartial")
-        }
+        @Html.Partial("_WelcomePanelPartial")
     </div>
 
     <img id="image-preload" style="width: 0; height: 0;" />

@@ -15,10 +15,10 @@ namespace Yio.Controllers
         public IActionResult Index(string repository, string fileId)
         {
             ViewBag.SiteName = Yio.Data.Constants.AppSettingsConstant.SiteName;
-            ViewBag.IsOfficial = true;
+            ViewBag.IsYiffco = true;
 
             if(ViewBag.SiteName != "Yiff.co") {
-                ViewBag.IsOfficial = false;
+                ViewBag.IsYiffco = false;
             }
 
             if(Yio.Data.Constants.VersionConstant.Patch == 0) {
