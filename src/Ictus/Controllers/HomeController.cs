@@ -37,12 +37,6 @@ namespace Ictus.Controllers
             return View("Index");
         }
 
-        [Route("/frame/comment/{repository}/{fileId}")]
-        public IActionResult Comment(string repository, string fileId)
-        {
-            return View("Comment");
-        }
-
         public string Error()
         {
             return "If you can see this message, something has gone terribly wrong.";
