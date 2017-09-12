@@ -1,7 +1,7 @@
-Yiff.co API V2
-==============
+Ictus API V2
+============
 
-Documents for Yiff.co's API V2, at **https://yiff.co/api/v2/...**
+Documents for Ictus API V2, at **/api/v2/...**
 
 #### Notes
 
@@ -21,7 +21,7 @@ Documents for Yiff.co's API V2, at **https://yiff.co/api/v2/...**
 ```
 {
 	id: "46572208-96e8-4c61-67f3-08d460ae8f05",
-	location: "https://yiff.fs.zyr.io/tumblr/tumblr_n4o0h1AhMC1swkv68o1_1280.jpg",
+	location: "https://files.example.com/tumblr/tumblr_n4o0h1AhMC1swkv68o1_1280.jpg",
 	file: {
 		id: "46572208-96e8-4c61-67f3-08d460ae8f05",
 		filename: "tumblr_n4o0h1AhMC1swkv68o1_1280.jpg",
@@ -84,7 +84,7 @@ Documents for Yiff.co's API V2, at **https://yiff.co/api/v2/...**
 ```
 {
 	id: "46572208-96e8-4c61-67f3-08d460ae8f05",
-	location: "https://yiff.fs.zyr.io/tumblr/tumblr_n4o0h1AhMC1swkv68o1_1280.jpg",
+	location: "https://files.example.com/tumblr/tumblr_n4o0h1AhMC1swkv68o1_1280.jpg",
 	file: {
 		id: "46572208-96e8-4c61-67f3-08d460ae8f05",
 		filename: "tumblr_n4o0h1AhMC1swkv68o1_1280.jpg",
