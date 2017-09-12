@@ -20,6 +20,11 @@ namespace Ictus.BulkImport.Business
         {
             _dbContext = dbContext;
 
+            Stopwatch stopwatch = new Stopwatch();
+            int importedItems = 0;
+
+            stopwatch.Start();
+
             var allFiles = Directory.GetFiles(ArgConstants.MoveFrom, "*.*", SearchOption.AllDirectories);
 
             foreach(var item in allFiles) {
@@ -82,22 +87,30 @@ namespace Ictus.BulkImport.Business
                         var to = ArgConstants.MoveTo + source + "/" + name;
                         try {
                             System.IO.File.Move(from, to);
-
                             _dbContext.SaveChanges();
-                            Console.WriteLine(newFile.Id + ":" + name + ":" + tag + "/" + source);
+
+                            importedItems++;
+                            Console.WriteLine("Imported [" + name + "] as [" + newFile.Id + "] to [" + tag + "/" + source + "]");
                         } catch(System.IO.DirectoryNotFoundException) {
                             Directory.CreateDirectory(ArgConstants.MoveTo + source);
-
                             System.IO.File.Move(from, to);
 
+                            importedItems++;
                             _dbContext.SaveChanges();
-                            Console.WriteLine(newFile.Id + ":" + name + ":" + tag + "/" + source);
+                            Console.WriteLine("Imported [" + name + "] as [" + newFile.Id + "] to [" + tag + "/" + source + "]");
                         } catch(System.IO.IOException) {
                             System.IO.File.Delete(from);
+
+                            Console.WriteLine("Removed [" + name + "]");
                         }
                     }
                 }
             }
+
+            stopwatch.Stop();
+
+            Console.WriteLine("Completed import of {0} items, in {1} hours, {2} minutes, {3} seconds",
+                importedItems.ToString(), stopwatch.Elapsed.Hours, stopwatch.Elapsed.Minutes, stopwatch.Elapsed.Seconds);
         }
 
         public void Dispose()
