@@ -2,9 +2,9 @@
 namespace Ictus.Data.Constants {
     public class VersionConstant
     {
-        public static int Release = 1706;
-        public static int Patch = 4;
-        public static string Codename = "Lewd Lion";
+        public static int Release = 1707;
+        public static int Patch = 0;
+        public static string Codename = "Fabulous Flamingo";
         public static bool Unstable = false;
     }
 }
