@@ -1,7 +1,7 @@
 using System;
-using Yio.Data.Enums;
+using Ictus.Data.Enums;
 
-namespace Yio.Models.ApiModels.ApiV2Models {
+namespace Ictus.Models.ApiModels.ApiV2Models {
     public class PostVoteApiModel
     {
         public Guid FileId { get; set; }

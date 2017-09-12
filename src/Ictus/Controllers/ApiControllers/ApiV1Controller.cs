@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
-using Yio.Data.Constants;
-using Yio.Data.Models;
-using Yio.Data.Repositories.Interfaces;
-using Yio.Models.ApiModels;
-using Yio.Models.ApiModels.ApiV1Models;
+using Ictus.Data.Constants;
+using Ictus.Data.Models;
+using Ictus.Data.Repositories.Interfaces;
+using Ictus.Models.ApiModels;
+using Ictus.Models.ApiModels.ApiV1Models;
 
 // Kill me.
 
-namespace Yio.Controllers.ApiControllers
+namespace Ictus.Controllers.ApiControllers
 {
     [Route("/api/v1")]
     public class ApiV1Controller : Controller

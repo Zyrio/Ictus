@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
-using Yio.Data.Models;
+using Ictus.Data.Models;
 
-namespace Yio.Models.ApiModels.ApiV2Models.ReturnModels {
+namespace Ictus.Models.ApiModels.ApiV2Models.ReturnModels {
     public class FileReturnModel
     {
         public Guid Id { get; set; }

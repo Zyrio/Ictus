@@ -6,10 +6,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore.Storage.Internal;
 using System;
-using Yio.Data;
-using Yio.Data.Enums;
+using Ictus.Data;
+using Ictus.Data.Enums;
 
-namespace Yio.Migrations
+namespace Ictus.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot
@@ -129,7 +129,7 @@ namespace Yio.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("Yio.Data.Models.ApplicationUser", b =>
+            modelBuilder.Entity("Ictus.Data.Models.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
@@ -180,7 +180,7 @@ namespace Yio.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("Yio.Data.Models.File", b =>
+            modelBuilder.Entity("Ictus.Data.Models.File", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
@@ -202,7 +202,7 @@ namespace Yio.Migrations
                     b.ToTable("Files");
                 });
 
-            modelBuilder.Entity("Yio.Data.Models.FileTag", b =>
+            modelBuilder.Entity("Ictus.Data.Models.FileTag", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
@@ -224,7 +224,7 @@ namespace Yio.Migrations
                     b.ToTable("FileTags");
                 });
 
-            modelBuilder.Entity("Yio.Data.Models.Tag", b =>
+            modelBuilder.Entity("Ictus.Data.Models.Tag", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
@@ -248,7 +248,7 @@ namespace Yio.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("Yio.Data.Models.ApplicationUser")
+                    b.HasOne("Ictus.Data.Models.ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -256,7 +256,7 @@ namespace Yio.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("Yio.Data.Models.ApplicationUser")
+                    b.HasOne("Ictus.Data.Models.ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -269,7 +269,7 @@ namespace Yio.Migrations
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("Yio.Data.Models.ApplicationUser")
+                    b.HasOne("Ictus.Data.Models.ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -277,19 +277,19 @@ namespace Yio.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("Yio.Data.Models.ApplicationUser")
+                    b.HasOne("Ictus.Data.Models.ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Yio.Data.Models.FileTag", b =>
+            modelBuilder.Entity("Ictus.Data.Models.FileTag", b =>
                 {
-                    b.HasOne("Yio.Data.Models.File", "File")
+                    b.HasOne("Ictus.Data.Models.File", "File")
                         .WithMany()
                         .HasForeignKey("FileId");
 
-                    b.HasOne("Yio.Data.Models.Tag", "Tag")
+                    b.HasOne("Ictus.Data.Models.Tag", "Tag")
                         .WithMany()
                         .HasForeignKey("TagId");
                 });

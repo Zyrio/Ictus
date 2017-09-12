@@ -9,7 +9,7 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "App: Build .NET App",
-            "program": "${workspaceRoot}/src/Yio/bin/Debug/netcoreapp2.0/Yio.dll",
+            "program": "${workspaceRoot}/src/Ictus/bin/Debug/netcoreapp2.0/Ictus.dll",
             "args": [],
             "cwd": "${workspaceRoot}",
             "stopAtEntry": false,

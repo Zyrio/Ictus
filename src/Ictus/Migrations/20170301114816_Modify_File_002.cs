@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Yio.Migrations
+namespace Ictus.Migrations
 {
     public partial class Modify_File_002 : Migration
     {

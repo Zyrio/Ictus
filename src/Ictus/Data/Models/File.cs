@@ -1,7 +1,7 @@
 using System;
-using Yio.Data.Enums;
+using Ictus.Data.Enums;
 
-namespace Yio.Data.Models
+namespace Ictus.Data.Models
 {
     public class File
     {

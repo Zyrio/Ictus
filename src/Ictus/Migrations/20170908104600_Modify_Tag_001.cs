@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Yio.Migrations
+namespace Ictus.Migrations
 {
     public partial class Modify_Tag_001 : Migration
     {

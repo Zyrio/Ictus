@@ -1,5 +1,5 @@
 
-namespace Yio.Models.ApiModels.ApiV1Models {
+namespace Ictus.Models.ApiModels.ApiV1Models {
     public class GetSiteApiModel : ErrorApiModel
     {
         public string Name { get; set; }

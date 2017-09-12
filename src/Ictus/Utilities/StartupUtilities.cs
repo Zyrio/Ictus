@@ -1,7 +1,7 @@
 using System;
-using Yio.Data.Constants;
+using Ictus.Data.Constants;
 
-namespace Yio.Utilities
+namespace Ictus.Utilities
 {
     public class StartupUtilities
     {
@@ -14,8 +14,8 @@ namespace Yio.Utilities
         {
             string FullVersion = "";
 
-            if(Yio.Data.Constants.VersionConstant.Unstable) {
-                FullVersion = "dev." + Yio.Data.Constants.VersionConstant.Patch.ToString() 
+            if(Ictus.Data.Constants.VersionConstant.Unstable) {
+                FullVersion = "dev." + Ictus.Data.Constants.VersionConstant.Patch.ToString() 
                             + " (" + VersionConstant.Release.ToString()
                             + "." + VersionConstant.Patch.ToString() + ")";
                 return FullVersion;

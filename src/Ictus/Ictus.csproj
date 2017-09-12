@@ -2,8 +2,8 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <VersionPrefix>17.6.4</VersionPrefix>
-    <AssemblyName>Yio</AssemblyName>
-    <PackageId>Yio</PackageId>
+    <AssemblyName>Ictus</AssemblyName>
+    <PackageId>Ictus</PackageId>
   </PropertyGroup>
   <ItemGroup>
     <Folder Include="wwwroot\" />

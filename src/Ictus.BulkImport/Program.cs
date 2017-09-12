@@ -3,12 +3,12 @@ using System.IO;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Yio.BulkImport.Data;
-using Yio.BulkImport.Data.Constants;
-using Yio.Data.Repositories;
-using Yio.Data.Repositories.Interfaces;
+using Ictus.BulkImport.Data;
+using Ictus.BulkImport.Data.Constants;
+using Ictus.Data.Repositories;
+using Ictus.Data.Repositories.Interfaces;
 
-namespace Yio.BulkImport
+namespace Ictus.BulkImport
 {
     class Program
     {

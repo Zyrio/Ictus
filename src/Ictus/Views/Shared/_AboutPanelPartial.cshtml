@@ -1,12 +1,12 @@
 @{
     var version = "";
-    var versionName = Yio.Data.Constants.VersionConstant.Codename.ToString();
+    var versionName = Ictus.Data.Constants.VersionConstant.Codename.ToString();
 
-    if(Yio.Data.Constants.VersionConstant.Patch == 0) {
-        version = Yio.Data.Constants.VersionConstant.Release.ToString();
+    if(Ictus.Data.Constants.VersionConstant.Patch == 0) {
+        version = Ictus.Data.Constants.VersionConstant.Release.ToString();
     } else {
-        version = Yio.Data.Constants.VersionConstant.Release.ToString() + "." +
-            Yio.Data.Constants.VersionConstant.Patch.ToString();
+        version = Ictus.Data.Constants.VersionConstant.Release.ToString() + "." +
+            Ictus.Data.Constants.VersionConstant.Patch.ToString();
     }
 }
 

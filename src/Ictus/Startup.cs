@@ -8,14 +8,14 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Yio.Data;
-using Yio.Data.Constants;
-using Yio.Data.Repositories;
-using Yio.Data.Repositories.Interfaces;
-using Yio.Utilities;
-using Yio.Utilities.Interfaces;
+using Ictus.Data;
+using Ictus.Data.Constants;
+using Ictus.Data.Repositories;
+using Ictus.Data.Repositories.Interfaces;
+using Ictus.Utilities;
+using Ictus.Utilities.Interfaces;
 
-namespace Yio
+namespace Ictus
 {
     public class Startup
     {

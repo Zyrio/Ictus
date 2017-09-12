@@ -6,11 +6,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using Yio.BulkImport.Data.Constants;
-using Yio.BulkImport.Data;
-using Yio.Data.Models;
+using Ictus.BulkImport.Data.Constants;
+using Ictus.BulkImport.Data;
+using Ictus.Data.Models;
 
-namespace Yio.BulkImport.Business
+namespace Ictus.BulkImport.Business
 {
     public class Import : IDisposable
     {
@@ -35,9 +35,9 @@ namespace Yio.BulkImport.Business
                 } else {
                     if(type == "jpg" || type == "jpeg" || type == "png" || type == "gif") {
                         //add file
-                        Yio.Data.Models.File file = new Yio.Data.Models.File {
+                        Ictus.Data.Models.File file = new Ictus.Data.Models.File {
                             Filename = name,
-                            Type = Yio.Data.Enums.Filetype.Image,
+                            Type = Ictus.Data.Enums.Filetype.Image,
                             OriginalFilename = name,
                             DateUploaded = DateTime.Now,
                             Source = source

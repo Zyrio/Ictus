@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Yio.Data.Models;
+using Ictus.Data.Models;
 
-namespace Yio.Data.Repositories.Interfaces
+namespace Ictus.Data.Repositories.Interfaces
 {
     public interface ITagRepository
     {

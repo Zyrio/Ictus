@@ -43,7 +43,7 @@ $ dotnet run
 
 ### Versioning
 
-Yio's versioning is split up into two parts (although, technically three):
+Ictus's versioning is split up into two parts (although, technically three):
 
 `{1}{2}.{3}`
 

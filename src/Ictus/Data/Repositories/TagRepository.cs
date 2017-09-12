@@ -2,10 +2,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using Yio.Data.Repositories.Interfaces;
-using Yio.Data.Models;
+using Ictus.Data.Repositories.Interfaces;
+using Ictus.Data.Models;
 
-namespace Yio.Data.Repositories
+namespace Ictus.Data.Repositories
 {
     public class TagRepository : ITagRepository
     {

@@ -1,5 +1,5 @@
 
-namespace Yio.BulkImport.Data.Constants
+namespace Ictus.BulkImport.Data.Constants
 {
     public class ArgConstants
     {

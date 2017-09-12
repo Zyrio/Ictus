@@ -1,8 +1,8 @@
 using System;
 using System.IO;
-using Yio.Utilities.Interfaces;
+using Ictus.Utilities.Interfaces;
 
-namespace Yio.Utilities
+namespace Ictus.Utilities
 {
     public class RandomGeneratorUtilities : IRandomGeneratorUtilities
     {

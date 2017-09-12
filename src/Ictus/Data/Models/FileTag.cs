@@ -1,6 +1,6 @@
 using System;
 
-namespace Yio.Data.Models
+namespace Ictus.Data.Models
 {
     public class FileTag
     {

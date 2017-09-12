@@ -7,16 +7,16 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
-using Yio.Data;
-using Yio.Data.Constants;
-using Yio.Data.Enums;
-using Yio.Data.Models;
-using Yio.Data.Repositories.Interfaces;
-using Yio.Models.ApiModels.ApiV2Models;
-using Yio.Models.ApiModels.ApiV2Models.ReturnModels;
-using Yio.Utilities.Interfaces;
+using Ictus.Data;
+using Ictus.Data.Constants;
+using Ictus.Data.Enums;
+using Ictus.Data.Models;
+using Ictus.Data.Repositories.Interfaces;
+using Ictus.Models.ApiModels.ApiV2Models;
+using Ictus.Models.ApiModels.ApiV2Models.ReturnModels;
+using Ictus.Utilities.Interfaces;
 
-namespace Yio.Controllers.ApiControllers
+namespace Ictus.Controllers.ApiControllers
 {
     [Route("/api/v2")]
     public class ApiV2Controller : Controller

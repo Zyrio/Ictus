@@ -1,5 +1,5 @@
 
-namespace Yio.Utilities.Interfaces
+namespace Ictus.Utilities.Interfaces
 {
     public interface IRandomGeneratorUtilities
     {

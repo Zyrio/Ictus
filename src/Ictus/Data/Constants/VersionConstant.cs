@@ -1,5 +1,5 @@
 
-namespace Yio.Data.Constants {
+namespace Ictus.Data.Constants {
     public class VersionConstant
     {
         public static int Release = 1706;

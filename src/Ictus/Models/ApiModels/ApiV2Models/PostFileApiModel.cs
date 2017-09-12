@@ -1,6 +1,6 @@
-using Yio.Data.Enums;
+using Ictus.Data.Enums;
 
-namespace Yio.Models.ApiModels.ApiV2Models {
+namespace Ictus.Models.ApiModels.ApiV2Models {
     public class PostFileApiModel
     {
         public string Name { get; set; }

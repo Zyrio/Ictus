@@ -3,10 +3,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
-using Yio.Data;
-using Yio.Data.Models;
+using Ictus.Data;
+using Ictus.Data.Models;
 
-namespace Yio.Migrations
+namespace Ictus.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     [Migration("20170301194732_Index_File_001")]
@@ -125,7 +125,7 @@ namespace Yio.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("Yio.WebappV2.Models.ApplicationUser", b =>
+            modelBuilder.Entity("Ictus.WebappV2.Models.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
@@ -175,7 +175,7 @@ namespace Yio.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("Yio.WebappV2.Models.File", b =>
+            modelBuilder.Entity("Ictus.WebappV2.Models.File", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
@@ -195,7 +195,7 @@ namespace Yio.Migrations
                     b.ToTable("Files");
                 });
 
-            modelBuilder.Entity("Yio.WebappV2.Models.FileTag", b =>
+            modelBuilder.Entity("Ictus.WebappV2.Models.FileTag", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
@@ -217,7 +217,7 @@ namespace Yio.Migrations
                     b.ToTable("FileTags");
                 });
 
-            modelBuilder.Entity("Yio.WebappV2.Models.Tag", b =>
+            modelBuilder.Entity("Ictus.WebappV2.Models.Tag", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
@@ -239,7 +239,7 @@ namespace Yio.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("Yio.WebappV2.Models.ApplicationUser")
+                    b.HasOne("Ictus.WebappV2.Models.ApplicationUser")
                         .WithMany("Claims")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -247,7 +247,7 @@ namespace Yio.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("Yio.WebappV2.Models.ApplicationUser")
+                    b.HasOne("Ictus.WebappV2.Models.ApplicationUser")
                         .WithMany("Logins")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -260,19 +260,19 @@ namespace Yio.Migrations
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("Yio.WebappV2.Models.ApplicationUser")
+                    b.HasOne("Ictus.WebappV2.Models.ApplicationUser")
                         .WithMany("Roles")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Yio.WebappV2.Models.FileTag", b =>
+            modelBuilder.Entity("Ictus.WebappV2.Models.FileTag", b =>
                 {
-                    b.HasOne("Yio.WebappV2.Models.File", "File")
+                    b.HasOne("Ictus.WebappV2.Models.File", "File")
                         .WithMany()
                         .HasForeignKey("FileId");
 
-                    b.HasOne("Yio.WebappV2.Models.Tag", "Tag")
+                    b.HasOne("Ictus.WebappV2.Models.Tag", "Tag")
                         .WithMany()
                         .HasForeignKey("TagId");
                 });

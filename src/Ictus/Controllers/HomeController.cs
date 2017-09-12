@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Yio.Controllers
+namespace Ictus.Controllers
 {
     public class HomeController : Controller
     {
@@ -14,20 +14,20 @@ namespace Yio.Controllers
         [Route("/{repository}/{fileId}")]
         public IActionResult Index(string repository, string fileId)
         {
-            ViewBag.SiteDescription = Yio.Data.Constants.AppSettingsConstant.SiteDescription;
-            ViewBag.SiteIcon = "fa-" + Yio.Data.Constants.AppSettingsConstant.SiteIcon;
-            ViewBag.SiteName = Yio.Data.Constants.AppSettingsConstant.SiteName;
+            ViewBag.SiteDescription = Ictus.Data.Constants.AppSettingsConstant.SiteDescription;
+            ViewBag.SiteIcon = "fa-" + Ictus.Data.Constants.AppSettingsConstant.SiteIcon;
+            ViewBag.SiteName = Ictus.Data.Constants.AppSettingsConstant.SiteName;
             ViewBag.IsYiffco = true;
 
             if(ViewBag.SiteName != "Yiff.co") {
                 ViewBag.IsYiffco = false;
             }
 
-            if(Yio.Data.Constants.VersionConstant.Patch == 0) {
-                ViewBag.Version = Yio.Data.Constants.VersionConstant.Release.ToString();
+            if(Ictus.Data.Constants.VersionConstant.Patch == 0) {
+                ViewBag.Version = Ictus.Data.Constants.VersionConstant.Release.ToString();
             } else {
-                ViewBag.Version = Yio.Data.Constants.VersionConstant.Release.ToString() + "." +
-                    Yio.Data.Constants.VersionConstant.Patch.ToString();
+                ViewBag.Version = Ictus.Data.Constants.VersionConstant.Release.ToString() + "." +
+                    Ictus.Data.Constants.VersionConstant.Patch.ToString();
             }
 
             return View("Index");

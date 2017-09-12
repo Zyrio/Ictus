@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Yio.Migrations
+namespace Ictus.Migrations
 {
     public partial class Index_File_001 : Migration
     {

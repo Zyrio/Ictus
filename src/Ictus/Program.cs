@@ -7,9 +7,9 @@ using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using Yio.Utilities;
+using Ictus.Utilities;
 
-namespace Yio
+namespace Ictus
 {
     public class Program
     {

@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Yio.Data.Models;
+using Ictus.Data.Models;
 
-namespace Yio.Data
+namespace Ictus.Data
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
