@@ -69,8 +69,7 @@ namespace Yio.Utilities
 
             Console.WriteLine("Release " + Release + Environment.NewLine);
 
-            Console.WriteLine("© Zyrio 20" + GetCopyrightYear() + ". All rights reserved.");
-            Console.WriteLine("Do not redistribute this code." + Environment.NewLine);
+            Console.WriteLine("© Zyrio 20" + GetCopyrightYear() + ". Licensed under MIT.");
 
             Console.ForegroundColor = ConsoleColor.DarkGray;
             Console.WriteLine("===" + Environment.NewLine);
