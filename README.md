@@ -18,23 +18,23 @@ The code behind [Yiff.co](https://nsfw.ducky.ws?url=https://yiff.co), now open t
 
 This assumes you have already pulled the repository and are in the root directory.
 
-Restore needed packages...
+##### Restore needed packages
 
 ```
-$ cd src/Ictus
+$ cd src/Ictus/
 $ dotnet restore # Restore NuGet packages
 $ cd ../..
 ```
 
 Copy `src/Ictus/appsettings.json.example` to `src/Ictus/appsettings.json` and configure accordingly.
 
-Set build envronment...
+##### Set build environment
 
 ```
 export ASPNETCORE_ENVIRONMENT="Development"
 ```
 
-Run Webapp project to start the web server...
+##### Run server
 
 ```
 $ cd src/Ictus/
