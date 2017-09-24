@@ -153,19 +153,31 @@ namespace Ictus.Controllers.ApiControllers
         [Route("random/{tagName}")]
         public async Task<FileReturnModel> GetRandomByTag(string tagName)
         {
-            Tag tag = await _tagRepository.GetTagByName(tagName);
-            FileTag fileTag = await _fileTagRepository.GetRandomFileTagById(tag.Id);
-            Data.Models.File file = fileTag.File;
-            List<FileTag> tagsForFile = await _fileTagRepository.GetFileTagsForFile(file.Id);
+            try {
+                Tag tag = await _tagRepository.GetTagByName(tagName);
+                FileTag fileTag = await _fileTagRepository.GetRandomFileTagById(tag.Id);
+                Data.Models.File file = fileTag.File;
+                List<FileTag> tagsForFile = await _fileTagRepository.GetFileTagsForFile(file.Id);
 
-            FileReturnModel returnItem = new FileReturnModel {
-                Id = file.Id,
-                Location = AppSettingsConstant.FileEndpoint + file.Source + "/" + file.Filename,
-                File = file,
-                Tags = tagsForFile
-            };
+                FileReturnModel returnItem = new FileReturnModel {
+                    Id = file.Id,
+                    Location = AppSettingsConstant.FileEndpoint + file.Source + "/" + file.Filename,
+                    File = file,
+                    Tags = tagsForFile,
+                    Status = 200
+                };
 
-            return returnItem;
+                return returnItem;
+            } catch {
+                Response.StatusCode = 400;
+
+                FileReturnModel returnItem = new FileReturnModel {
+                    Message = "Unable to load board '" + tagName + "'",
+                    Status = 400
+                };
+
+                return returnItem;
+            }
         }
 
         // /api/v2/tags
