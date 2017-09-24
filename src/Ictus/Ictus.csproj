@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
-    <VersionPrefix>17.8.5</VersionPrefix>
+    <VersionPrefix>17.8.6</VersionPrefix>
     <AssemblyName>Ictus</AssemblyName>
     <PackageId>Ictus</PackageId>
   </PropertyGroup>
