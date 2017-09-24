@@ -172,7 +172,7 @@ namespace Ictus.Controllers.ApiControllers
                 Response.StatusCode = 400;
 
                 FileReturnModel returnItem = new FileReturnModel {
-                    Message = "Unable to load board '" + tagName + "'",
+                    Message = "Unable to load board '" + tagName + "'. See https://yiff.co for available boards.",
                     Status = 400
                 };
 
