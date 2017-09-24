@@ -53,12 +53,16 @@ Ictus's versioning is split up into two parts (although, technically three):
 
 For example, **1709.4** translates into **Release 9 for 2017, Patch 4**.
 
+The version is set in `src/Ictus/Data/Constants/VersionConstant.cs`.
+
 The version also translates into three parts, which is needed for `<VersionPrefix>` in `src/Ictus/Ictus.csproj`. It's easy enough to not explain, but show in a few examples:
 
  - `17.7.0` is `1707`
  - `18.13.5` is `1813.5`
  - `19.1.1` is `1901.1`
  - `20.0.0` is `2000`, which is not valid.
+
+There is also an `Unstable` bool in `src/Ictus/Data/Constants/VersionConstant.cs`. This can only ever be set when `{3}` is "0". Setting this to true means the release (e.g. `1707`) is not quite finished yet, and is still considered "beta". `{3}` should never increment during this phase.
 
 Every release (`{2}`) also triggers a new codename. Currently, there is, has been, and will be:
 
