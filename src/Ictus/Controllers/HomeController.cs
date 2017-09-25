@@ -48,6 +48,7 @@ namespace Ictus.Controllers
                 Data.Models.File file = await _fileRepository.GetFileById(fileGuid);
 
                 ViewBag.InitialFile = AppSettingsConstant.FileEndpoint + file.Source + "/" + file.Filename;
+                ViewBag.InitialFilename = file.Filename;
             }
 
             return View("Index");
