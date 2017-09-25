@@ -1,18 +1,26 @@
+using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Ictus.Data.Constants;
+using Ictus.Data.Repositories.Interfaces;
 
 namespace Ictus.Controllers
 {
     public class HomeController : Controller
     {
-        public HomeController()
+        private readonly IFileRepository _fileRepository;
+
+        public HomeController(
+            IFileRepository fileRepository
+        )
         {
+            _fileRepository = fileRepository;
         }
 
         [Route("/")]
         [Route("/{repository}")]
         [Route("/{repository}/{fileId}")]
-        public IActionResult Index(string repository, string fileId)
+        public async Task<IActionResult> Index(string repository, string fileId)
         {
             ViewBag.SiteDescription = Ictus.Data.Constants.AppSettingsConstant.SiteDescription;
             ViewBag.SiteIcon = "fa-" + Ictus.Data.Constants.AppSettingsConstant.SiteIcon;
@@ -32,6 +40,14 @@ namespace Ictus.Controllers
 
             if(Ictus.Data.Constants.VersionConstant.Unstable) {
                 ViewBag.Version += "-dev";
+            }
+
+            if(!String.IsNullOrEmpty(fileId)) {
+                Guid fileGuid = new Guid(fileId);
+
+                Data.Models.File file = await _fileRepository.GetFileById(fileGuid);
+
+                ViewBag.InitialFile = AppSettingsConstant.FileEndpoint + file.Source + "/" + file.Filename;
             }
 
             return View("Index");

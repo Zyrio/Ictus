@@ -5,6 +5,14 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    @if(!String.IsNullOrEmpty(@ViewBag.InitialFile)) {
+        <meta property="og:title" content="@ViewBag.SiteName">
+        <meta property="twitter:title" content="@ViewBag.SiteName">
+        <meta property="og:image" content="@ViewBag.InitialFile">
+        <meta name="twitter:image" content="@ViewBag.InitialFile">
+        <meta name="twitter:card" content="summary_large_image">
+    }
+
     <link href="//fonts.googleapis.com/css?family=Raleway:400,700|Oswald" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/css/site.css" type="text/css" asp-append-version="true">
