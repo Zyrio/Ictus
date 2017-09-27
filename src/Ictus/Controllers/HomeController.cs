@@ -17,6 +17,13 @@ namespace Ictus.Controllers
             _fileRepository = fileRepository;
         }
 
+        [Route("/frame/comment/{repository}/{fileId}")]
+        public IActionResult Comment(string repository, string fileId)
+        {
+            return View("Comment");
+        }
+
+
         [Route("/")]
         [Route("/{repository}")]
         [Route("/{repository}/{fileId}")]
