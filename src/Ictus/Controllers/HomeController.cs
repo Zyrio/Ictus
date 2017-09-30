@@ -18,11 +18,10 @@ namespace Ictus.Controllers
         }
 
         [Route("/frame/comment/{repository}/{fileId}")]
-        public IActionResult Comment(string repository, string fileId)
+        public IActionResult GetCommentFrame(string repository, string fileId)
         {
             return View("Comment");
         }
-
 
         [Route("/")]
         [Route("/{repository}")]
