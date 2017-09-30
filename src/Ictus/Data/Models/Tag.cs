@@ -8,8 +8,5 @@ namespace Ictus.Data.Models
         public Guid Id { get; set; }
         public string Name { get; set; }
         public int FileCount { get; set; }
-
-        [NotMapped]
-        public bool Board { get; set; } = true;
     }
 }
